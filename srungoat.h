@@ -28,14 +28,15 @@
 #include <algorithm>    
 
 #ifdef _KERNEL_MODE
-    #include <ntddk.h>
-    #include <ntdef.h>
+#include <ntddk.h>
+#include <ntdef.h>
 #else
-    #include <Windows.h>
+#include <Windows.h>
 #endif
 #include <Intrin.h>
 
 #pragma once
+
 
 // This protection is under Custom License – Non-Commercial Source Distribution
 // Copyright (c) 2025 srungot
@@ -73,24 +74,28 @@
 
 /*
     Changelog:
-    - 2025-07-31:
-        - Added changelog
-        - Compatible multi include
-        - Modified string obfuscation function
-        - Better encryption key for the macro OBF
-        - Update of anti windows title error due to false positives on windows 11 ( windows terminal )
+    - 2026-01-13:
+        - Improved string obfuscation logic
+        - Replaced static XOR with rolling key encryption
+        - Strengthened encryption key generation
+        - Cleaned up unnecessary includes
+        - Removed racial slur fake signatures
+        - Made fake auth messages more believable (e.g. before PREMIUM-123)
+        - Changed call level to 2 (previously set to 3, which did not exist)
+        - Made fake security sections look more legitimate instead of placeholders (e.g. 1A, 2B)
 */
 
-#define JUNK_ON_OBF 1  
-#define JUNK_ON_OBF_LEVEL 1     
+
+#define JUNK_ON_OBF 1 // 1/0
+#define JUNK_ON_OBF_LEVEL 3 0/3
 #define Name_Of_Sections_watermark ".1337"
-#define FAKE_SIGNATURES 1
-#define CALL_LEVEL 3
+#define FAKE_SIGNATURES 1 1/0
+#define CALL_LEVEL 2 0/2
 
 #ifdef _MSC_VER
-    #define SECTION(x) __declspec(allocate(x))
+#define SECTION(x) __declspec(allocate(x))
 #else
-    #define SECTION(x) __attribute__((section(x)))
+#define SECTION(x) __attribute__((section(x)))
 #endif
 
 #define FAKE_SIG(name, section, sig) \
@@ -113,239 +118,158 @@ struct REMOTE_PE_HEADER : PE_HEADER {
 };
 
 #if FAKE_SIGNATURES
-    #ifdef _MSC_VER
-        #pragma section(".arch", read)
-        #pragma section(".srdata", read)
-        #pragma section(".xdata", read)
-        #pragma section(".xtls", read)
-        #pragma section(".themida", read)
-        #pragma section(".vmp0", read)
-        #pragma section(".vmp1", read)
-        #pragma section(".vmp2", read)
-        #pragma section(".enigma1", read)
-        #pragma section(".enigma2", read)
-        #pragma section(".dsstext", read)
-        #pragma section(".NIGGER", read)
-        #pragma section(".NIGGER1", read)
-        #pragma section(".NIGGER2", read)
-        #pragma section(".NIGGER3", read)
-        #pragma section(".NIGGER4", read)
-        #pragma section(".NIGGER5", read)
-        #pragma section(".SEC_0x1A", read)
-        #pragma section(".SEC_0x2B", read)
-        #pragma section(".SEC_0x3C", read)
-        #pragma section(".SEC_0x4D", read)
-        #pragma section(".SEC_0x5E", read)
-        #pragma section(".SEC_0x6F", read)
-        #pragma section(".SEC_0x7G", read)
-        #pragma section(".SEC_0x8H", read)
-        #pragma section(".SEC_0x9I", read)
-        #pragma section(".SEC_0x10J", read)
-        #pragma section(".SEC_0x11K", read)
-        #pragma section(".SEC_0x12L", read)
-        #pragma section(".SEC_0x13M", read)
-        #pragma section(".SEC_0x14N", read)
-        #pragma section(".SEC_0x15O", read)
-        #pragma section(".SEC_0x16P", read)
-        #pragma section(".SEC_0x17Q", read)
-        #pragma section(".SEC_0x18R", read)
-        #pragma section(".SEC_0x19S", read)
-        #pragma section(".SEC_0x20T", read)
-        #pragma section(".SEC_0x21U", read)
-        #pragma section(".SEC_0x22V", read)
-        #pragma section(".SEC_0x23W", read)
-        #pragma section(".SEC_0x24X", read)
-        #pragma section(".SEC_0x25Y", read)
-        #pragma section(".SEC_0x26Z", read)
-        #pragma section(".SEC_0x27AA", read)
-        #pragma section(".SEC_0x28AB", read)
-        #pragma section(".SEC_0x29AC", read)
-        #pragma section(".SEC_0x30AD", read)
-        #pragma section(".SEC_0x31AE", read)
-        #pragma section(".SEC_0x32AF", read)
-        #pragma section(".SEC_0x33AG", read)
-        #pragma section(".SEC_0x34AH", read)
-        #pragma section(".SEC_0x35AI", read)
-        #pragma section(".SEC_0x36AJ", read)
-        #pragma section(".SEC_0x37AK", read)
-        #pragma section(".SEC_0x38AL", read)
-        #pragma section(".SEC_0x39AM", read)
-        #pragma section(".SEC_0x40AN", read)
-        #pragma section(".SEC_0x41AO", read)
-        #pragma section(".SEC_0x42AP", read)
-        #pragma section(".SEC_0x43AQ", read)
-        #pragma section(".SEC_0x44AR", read)
-        #pragma section(".SEC_0x45AS", read)
-        #pragma section(".SEC_0x46AT", read)
-        #pragma section(".SEC_0x47AU", read)
-        #pragma section(".SEC_0x48AV", read)
-        #pragma section(".SEC_0x49AW", read)
-        #pragma section(".SEC_0x50AX", read)
-        #pragma section(".SEC_0x51AY", read)
-        #pragma section(".SEC_0x52AZ", read)
-        #pragma section(".SEC_0x53BA", read)
-        #pragma section(".SEC_0x54BB", read)
-        #pragma section(".SEC_0x55BC", read)
-        #pragma section(".SEC_0x56BD", read)
-        #pragma section(".SEC_0x57BE", read)
-        #pragma section(".SEC_0x58BF", read)
-        #pragma section(".SEC_0x59BG", read)
-        #pragma section(".SEC_0x60BH", read)
-        #pragma section(".SEC_0x61BI", read)
-        #pragma section(".SEC_0x62BJ", read)
-        #pragma section(".SEC_0x63BK", read)
-        #pragma section(".SEC_0x64BL", read)
-        #pragma section(".SEC_0x65BM", read)
-        #pragma section(".SEC_0x66BN", read)
-        #pragma section(".SEC_0x67BO", read)
-        #pragma section(".SEC_0x68BP", read)
-        #pragma section(".SEC_0x69BQ", read)
-        #pragma section(".SEC_0x70BR", read)
-        #pragma section(".SEC_0x71BS", read)
-        #pragma section(".SEC_0x72BT", read)
-        #pragma section(".SEC_0x73BU", read)
-        #pragma section(".SEC_0x74BV", read)
-        #pragma section(".SEC_0x75BW", read)
-        #pragma section(".SEC_0x76BX", read)
-        #pragma section(".SEC_0x77BY", read)
-        #pragma section(".SEC_0x78BZ", read)
-        #pragma section(".SEC_0x79CA", read)
-        #pragma section(".SEC_0x80CB", read)
-        #pragma section(".SEC_0x81CC", read)
-        #pragma section(".SEC_0x82CD", read)
-        #pragma section(".SEC_0x83CE", read)
-        #pragma section(".SEC_0x84CF", read)
-        #pragma section(".SEC_0x85CG", read)
-        #pragma section(".SEC_0x86CH", read)
-        #pragma section(".SEC_0x87CI", read)
-        #pragma section(".SEC_0x88CJ", read)
-        #pragma section(".SEC_0x89CK", read)
-        #pragma section(".SEC_0x90CL", read)
-        #pragma section(".SEC_0x91CM", read)
-        #pragma section(".SEC_0x92CN", read)
-        #pragma section(".SEC_0x93CO", read)
-        #pragma section(".SEC_0x94CP", read)
-        #pragma section(".SEC_0x95CQ", read)
-        #pragma section(".SEC_0x96CR", read)
-        #pragma section(".SEC_0x97CS", read)
-        #pragma section(".SEC_0x98CT", read)
-        #pragma section(".SEC_0x99CU", read)
-        #pragma section(".SEC_0x100CV", read)
-    #endif
+#ifdef _MSC_VER
+#pragma section(".themida", read)
+#pragma section(".vmp0", read)
+#pragma section(".vmp1", read)
+#pragma section(".vmp2", read)
+#pragma section(".arch", read)
+#pragma section(".srdata", read)
+#pragma section(".xdata", read)
+#pragma section(".xtls", read)
+#pragma section(".dsstext", read)
+#pragma section(".enigma1", read)
+#pragma section(".enigma2", read)
+#pragma section(".SEC_0x3C", read)
+#pragma section(".SEC_0x17Q", read)
+#pragma section(".SEC_0x64BL", read)
+#pragma section(".SEC_0x1A", read)
+#pragma section(".SEC_0x88CJ", read)
+#pragma section(".SEC_0x2B", read)
+#pragma section(".SEC_0x55BC", read)
+#pragma section(".SEC_0x10J", read)
+#pragma section(".SEC_0x7G", read)
+#pragma section(".SEC_0x92CN", read)
+#pragma section(".SEC_0x41AO", read)
+#pragma section(".SEC_0x26Z", read)
+#pragma section(".SEC_0x80CB", read)
+#pragma section(".SEC_0x33AG", read)
+#pragma section(".SEC_0x5E", read)
+#pragma section(".SEC_0x69BQ", read)
+#pragma section(".SEC_0x14N", read)
+#pragma section(".SEC_0x97CS", read)
+#pragma section(".SEC_0x48AV", read)
+#pragma section(".SEC_0x21U", read)
+#pragma section(".SEC_0x60BH", read)
+#pragma section(".SEC_0x8H", read)
+#pragma section(".SEC_0x75BW", read)
+#pragma section(".SEC_0x30AD", read)
+#pragma section(".SEC_0x11K", read)
+#pragma section(".SEC_0x86CH", read)
+#pragma section(".SEC_0x4D", read)
+#pragma section(".SEC_0x58BF", read)
+#pragma section(".SEC_0x19S", read)
+#pragma section(".SEC_0x71BS", read)
+#pragma section(".SEC_0x24X", read)
+#pragma section(".SEC_0x66BN", read)
+#pragma section(".SEC_0x9I", read)
+#pragma section(".SEC_0x82CD", read)
+#pragma section(".SEC_0x36AJ", read)
+#pragma section(".SEC_0x52AZ", read)
+#pragma section(".SEC_0x15O", read)
+#pragma section(".SEC_0x90CL", read)
+#pragma section(".SEC_0x44AR", read)
+#pragma section(".SEC_0x27AA", read)
+#pragma section(".SEC_0x73BU", read)
+#pragma section(".SEC_0x6F", read)
+#pragma section(".SEC_0x85CG", read)
+#pragma section(".SEC_0x38AL", read)
+#pragma section(".SEC_0x99CU", read)
+#pragma section(".SEC_0x20T", read)
+#pragma section(".SEC_0x62BJ", read)
+#pragma section(".SEC_0x12L", read)
+#pragma section(".SEC_0x78BZ", read)
+#pragma section(".SEC_0x50AX", read)
+#pragma section(".SEC_0x34AH", read)
+#pragma section(".SEC_0x95CQ", read)
+#pragma section(".SEC_0x68BP", read)
+#pragma section(".SEC_0x18R", read)
+#pragma section(".SEC_0x83CE", read)
+#pragma section(".SEC_0x47AU", read)
+#pragma section(".SEC_0x29AC", read)
+#pragma section(".SEC_0x72BT", read)
+#pragma section(".SEC_0x91CM", read)
+#pragma section(".SEC_0x42AP", read)
+#pragma section(".SEC_0x25Y", read)
+#pragma section(".SEC_0x70BR", read)
+#pragma section(".SEC_0x35AI", read)
+#pragma section(".SEC_0x56BD", read)
+#pragma section(".SEC_0x13M", read)
+#pragma section(".SEC_0x100CV", read)
+#endif
 
-    FAKE_SIG(_enigma1, ".enigma1", 0); FAKE_SIG(_enigma2, ".enigma2", 0);
-    FAKE_SIG(_vmp1, ".vmp0", 0); FAKE_SIG(_vmp2, ".vmp1", 0); FAKE_SIG(_vmp3, ".vmp2", 0);
-    FAKE_SIG(_denuvo1, ".arch", 0); FAKE_SIG(_denuvo2, ".srdata", 0); FAKE_SIG(_denuvo3, ".xdata", 0);
-    FAKE_SIG(_denuvo5, ".xtls", "\x64\x65\x6E\x75\x76\x6F\x5F\x61\x74\x64\x00\x00\x00\x00\x00\x00");
-    FAKE_SIG(_themida1, ".themida", 0);
-    FAKE_SIG(_securom1, ".dsstext", 0);
-    
-    FAKE_SIG(_extra1, ".NIGGER", "\x44\x45\x56\x49\x4C");  
-    FAKE_SIG(_extra2, ".NIGGER1", "\x53\x4B\x55\x4C\x4C");  
-    FAKE_SIG(_extra3, ".NIGGER2", "\x53\x45\x43\x55\x52\x45");  
-    FAKE_SIG(_extra4, ".NIGGER3", "\x46\x4C\x41\x4D\x45");  
-    FAKE_SIG(_extra5, ".NIGGER4", "\x53\x59\x53\x54\x45\x4D");  
-    FAKE_SIG(_extra6, ".NIGGER5", "\x53\x59\x53\x54\x45\x4D\x4F");  
-    FAKE_SIG(_rand1, ".SEC_0x1A", "\x50\x52\x4F\x54\x45\x43\x54"); 
-    FAKE_SIG(_rand2, ".SEC_0x2B", "\x53\x45\x43\x55\x52\x45\x44");
-    FAKE_SIG(_rand3, ".SEC_0x3C", "\x52\x49\x54\x59\x5F\x4B\x45");
-    FAKE_SIG(_rand4, ".SEC_0x4D", "\x43\x4F\x44\x45\x5F\x53\x45");
-    FAKE_SIG(_rand5, ".SEC_0x5E", "\x44\x41\x54\x41\x5F\x50\x52");
-    FAKE_SIG(_rand6, ".SEC_0x6F", "\x48\x41\x53\x48\x5F\x4B\x45");
-    FAKE_SIG(_rand7, ".SEC_0x7G", "\x43\x52\x59\x50\x54\x4F\x53");
-    FAKE_SIG(_rand8, ".SEC_0x8H", "\x53\x41\x4C\x54\x5F\x4B\x45");
-    FAKE_SIG(_rand9, ".SEC_0x9I", "\x4B\x45\x59\x53\x5F\x53\x45");
-    FAKE_SIG(_rand10, ".SEC_0x10J", "\x42\x59\x54\x45\x5F\x43\x4F");
-    FAKE_SIG(_rand11, ".SEC_0x11K", "\x48\x45\x58\x5F\x44\x41\x54");
-    FAKE_SIG(_rand12, ".SEC_0x12L", "\x43\x4F\x44\x45\x5F\x50\x52");
-    FAKE_SIG(_rand13, ".SEC_0x13M", "\x53\x45\x43\x5F\x44\x41\x54");
-    FAKE_SIG(_rand14, ".SEC_0x14N", "\x50\x52\x4F\x54\x5F\x4B\x45");
-    FAKE_SIG(_rand15, ".SEC_0x15O", "\x4B\x45\x59\x5F\x44\x41\x54");
-    FAKE_SIG(_rand16, ".SEC_0x16P", "\x48\x41\x53\x48\x5F\x53\x45");
-    FAKE_SIG(_rand17, ".SEC_0x17Q", "\x43\x52\x59\x50\x54\x5F\x4B");
-    FAKE_SIG(_rand18, ".SEC_0x18R", "\x53\x41\x4C\x54\x5F\x50\x52");
-    FAKE_SIG(_rand19, ".SEC_0x19S", "\x42\x59\x54\x45\x5F\x53\x45");
-    FAKE_SIG(_rand20, ".SEC_0x20T", "\x48\x45\x58\x5F\x4B\x45\x59");
-    FAKE_SIG(_rand21, ".SEC_0x21U", "\x43\x4F\x44\x45\x5F\x4B\x45");
-    FAKE_SIG(_rand22, ".SEC_0x22V", "\x53\x45\x43\x5F\x50\x52\x4F");
-    FAKE_SIG(_rand23, ".SEC_0x23W", "\x50\x52\x4F\x54\x5F\x53\x45");
-    FAKE_SIG(_rand24, ".SEC_0x24X", "\x4B\x45\x59\x5F\x50\x52\x4F");
-    FAKE_SIG(_rand25, ".SEC_0x25Y", "\x48\x41\x53\x48\x5F\x44\x41");
-    FAKE_SIG(_rand26, ".SEC_0x26Z", "\x43\x52\x59\x50\x54\x5F\x53");
-    FAKE_SIG(_rand27, ".SEC_0x27AA", "\x53\x41\x4C\x54\x5F\x44\x41");
-    FAKE_SIG(_rand28, ".SEC_0x28AB", "\x42\x59\x54\x45\x5F\x50\x52");
-    FAKE_SIG(_rand29, ".SEC_0x29AC", "\x48\x45\x58\x5F\x53\x45\x43");
-    FAKE_SIG(_rand30, ".SEC_0x30AD", "\x43\x4F\x44\x45\x5F\x44\x41");
-    FAKE_SIG(_rand31, ".SEC_0x31AE", "\x53\x45\x43\x5F\x4B\x45\x59");
-    FAKE_SIG(_rand32, ".SEC_0x32AF", "\x50\x52\x4F\x54\x5F\x44\x41");
-    FAKE_SIG(_rand33, ".SEC_0x33AG", "\x4B\x45\x59\x5F\x53\x45\x43");
-    FAKE_SIG(_rand34, ".SEC_0x34AH", "\x48\x41\x53\x48\x5F\x50\x52");
-    FAKE_SIG(_rand35, ".SEC_0x35AI", "\x43\x52\x59\x50\x54\x5F\x44");
-    FAKE_SIG(_rand36, ".SEC_0x36AJ", "\x53\x41\x4C\x54\x5F\x53\x45");
-    FAKE_SIG(_rand37, ".SEC_0x37AK", "\x42\x59\x54\x45\x5F\x44\x41");
-    FAKE_SIG(_rand38, ".SEC_0x38AL", "\x48\x45\x58\x5F\x50\x52\x4F");
-    FAKE_SIG(_rand39, ".SEC_0x39AM", "\x43\x4F\x44\x45\x5F\x53\x45");
-    FAKE_SIG(_rand40, ".SEC_0x40AN", "\x53\x45\x43\x5F\x44\x41\x54");
-    FAKE_SIG(_rand41, ".SEC_0x41AO", "\x50\x52\x4F\x54\x5F\x4B\x45");
-    FAKE_SIG(_rand42, ".SEC_0x42AP", "\x4B\x45\x59\x5F\x44\x41\x54");
-    FAKE_SIG(_rand43, ".SEC_0x43AQ", "\x48\x41\x53\x48\x5F\x53\x45");
-    FAKE_SIG(_rand44, ".SEC_0x44AR", "\x43\x52\x59\x50\x54\x5F\x4B");
-    FAKE_SIG(_rand45, ".SEC_0x45AS", "\x53\x41\x4C\x54\x5F\x50\x52");
-    FAKE_SIG(_rand46, ".SEC_0x46AT", "\x42\x59\x54\x45\x5F\x53\x45");
-    FAKE_SIG(_rand47, ".SEC_0x47AU", "\x48\x45\x58\x5F\x4B\x45\x59");
-    FAKE_SIG(_rand48, ".SEC_0x48AV", "\x43\x4F\x44\x45\x5F\x4B\x45");
-    FAKE_SIG(_rand49, ".SEC_0x49AW", "\x53\x45\x43\x5F\x50\x52\x4F");
-    FAKE_SIG(_rand50, ".SEC_0x50AX", "\x50\x52\x4F\x54\x5F\x53\x45");
-    FAKE_SIG(_rand51, ".SEC_0x51AY", "\x4B\x45\x59\x5F\x50\x52\x4F");
-    FAKE_SIG(_rand52, ".SEC_0x52AZ", "\x48\x41\x53\x48\x5F\x44\x41");
-    FAKE_SIG(_rand53, ".SEC_0x53BA", "\x43\x52\x59\x50\x54\x5F\x53");
-    FAKE_SIG(_rand54, ".SEC_0x54BB", "\x53\x41\x4C\x54\x5F\x44\x41");
-    FAKE_SIG(_rand55, ".SEC_0x55BC", "\x42\x59\x54\x45\x5F\x50\x52");
-    FAKE_SIG(_rand56, ".SEC_0x56BD", "\x48\x45\x58\x5F\x53\x45\x43");
-    FAKE_SIG(_rand57, ".SEC_0x57BE", "\x43\x4F\x44\x45\x5F\x44\x41");
-    FAKE_SIG(_rand58, ".SEC_0x58BF", "\x53\x45\x43\x5F\x4B\x45\x59");
-    FAKE_SIG(_rand59, ".SEC_0x59BG", "\x50\x52\x4F\x54\x5F\x44\x41");
-    FAKE_SIG(_rand60, ".SEC_0x60BH", "\x4B\x45\x59\x5F\x53\x45\x43");
-    FAKE_SIG(_rand61, ".SEC_0x61BI", "\x48\x41\x53\x48\x5F\x50\x52");
-    FAKE_SIG(_rand62, ".SEC_0x62BJ", "\x43\x52\x59\x50\x54\x5F\x44");
-    FAKE_SIG(_rand63, ".SEC_0x63BK", "\x53\x41\x4C\x54\x5F\x53\x45");
-    FAKE_SIG(_rand64, ".SEC_0x64BL", "\x42\x59\x54\x45\x5F\x44\x41");
-    FAKE_SIG(_rand65, ".SEC_0x65BM", "\x48\x45\x58\x5F\x50\x52\x4F");
-    FAKE_SIG(_rand66, ".SEC_0x66BN", "\x43\x4F\x44\x45\x5F\x53\x45");
-    FAKE_SIG(_rand67, ".SEC_0x67BO", "\x53\x45\x43\x5F\x44\x41\x54");
-    FAKE_SIG(_rand68, ".SEC_0x68BP", "\x50\x52\x4F\x54\x5F\x4B\x45");
-    FAKE_SIG(_rand69, ".SEC_0x69BQ", "\x4B\x45\x59\x5F\x44\x41\x54");
-    FAKE_SIG(_rand70, ".SEC_0x70BR", "\x48\x41\x53\x48\x5F\x53\x45");
-    FAKE_SIG(_rand71, ".SEC_0x71BS", "\x43\x52\x59\x50\x54\x5F\x4B");
-    FAKE_SIG(_rand72, ".SEC_0x72BT", "\x53\x41\x4C\x54\x5F\x50\x52");
-    FAKE_SIG(_rand73, ".SEC_0x73BU", "\x42\x59\x54\x45\x5F\x53\x45");
-    FAKE_SIG(_rand74, ".SEC_0x74BV", "\x48\x45\x58\x5F\x4B\x45\x59");
-    FAKE_SIG(_rand75, ".SEC_0x75BW", "\x43\x4F\x44\x45\x5F\x4B\x45");
-    FAKE_SIG(_rand76, ".SEC_0x76BX", "\x53\x45\x43\x5F\x50\x52\x4F");
-    FAKE_SIG(_rand77, ".SEC_0x77BY", "\x50\x52\x4F\x54\x5F\x53\x45");
-    FAKE_SIG(_rand78, ".SEC_0x78BZ", "\x4B\x45\x59\x5F\x50\x52\x4F");
-    FAKE_SIG(_rand79, ".SEC_0x79CA", "\x48\x41\x53\x48\x5F\x44\x41");
-    FAKE_SIG(_rand80, ".SEC_0x80CB", "\x43\x52\x59\x50\x54\x5F\x53");
-    FAKE_SIG(_rand81, ".SEC_0x81CC", "\x53\x41\x4C\x54\x5F\x44\x41");
-    FAKE_SIG(_rand82, ".SEC_0x82CD", "\x42\x59\x54\x45\x5F\x50\x52");
-    FAKE_SIG(_rand83, ".SEC_0x83CE", "\x48\x45\x58\x5F\x53\x45\x43");
-    FAKE_SIG(_rand84, ".SEC_0x84CF", "\x43\x4F\x44\x45\x5F\x44\x41");
-    FAKE_SIG(_rand85, ".SEC_0x85CG", "\x53\x45\x43\x5F\x4B\x45\x59");
-    FAKE_SIG(_rand86, ".SEC_0x86CH", "\x50\x52\x4F\x54\x5F\x44\x41");
-    FAKE_SIG(_rand87, ".SEC_0x87CI", "\x4B\x45\x59\x5F\x53\x45\x43");
-    FAKE_SIG(_rand88, ".SEC_0x88CJ", "\x48\x41\x53\x48\x5F\x50\x52");
-    FAKE_SIG(_rand89, ".SEC_0x89CK", "\x43\x52\x59\x50\x54\x5F\x44");
-    FAKE_SIG(_rand90, ".SEC_0x90CL", "\x53\x41\x4C\x54\x5F\x53\x45");
-    FAKE_SIG(_rand91, ".SEC_0x91CM", "\x42\x59\x54\x45\x5F\x44\x41");
-    FAKE_SIG(_rand92, ".SEC_0x92CN", "\x48\x45\x58\x5F\x50\x52\x4F");
-    FAKE_SIG(_rand93, ".SEC_0x93CO", "\x43\x4F\x44\x45\x5F\x53\x45");
-    FAKE_SIG(_rand94, ".SEC_0x94CP", "\x53\x45\x43\x5F\x44\x41\x54");
-    FAKE_SIG(_rand95, ".SEC_0x95CQ", "\x50\x52\x4F\x54\x5F\x4B\x45");
-    FAKE_SIG(_rand96, ".SEC_0x96CR", "\x4B\x45\x59\x5F\x44\x41\x54");
-    FAKE_SIG(_rand97, ".SEC_0x97CS", "\x48\x41\x53\x48\x5F\x53\x45");
-    FAKE_SIG(_rand98, ".SEC_0x98CT", "\x43\x52\x59\x50\x54\x5F\x4B");
-    FAKE_SIG(_rand99, ".SEC_0x99CU", "\x53\x41\x4C\x54\x5F\x50\x52");
-    FAKE_SIG(_rand100, ".SEC_0x100CV", "\x42\x59\x54\x45\x5F\x53\x45");
+FAKE_SIG(_enigma1, ".enigma1", 0); FAKE_SIG(_enigma2, ".enigma2", 0);
+FAKE_SIG(_vmp1, ".vmp0", 0); FAKE_SIG(_vmp2, ".vmp1", 0); FAKE_SIG(_vmp3, ".vmp2", 0);
+FAKE_SIG(_themida1, ".themida", 0);
+FAKE_SIG(_denuvo1, ".arch", 0); FAKE_SIG(_denuvo2, ".srdata", 0); FAKE_SIG(_denuvo3, ".xdata", 0);
+FAKE_SIG(_denuvo5, ".xtls", "\x64\x65\x6E\x75\x76\x6F\x5F\x61\x74\x64\x00\x00\x00\x00\x00\x00");
+FAKE_SIG(_securom1, ".dsstext", 0);
+FAKE_SIG(_SEC_0x3C, ".SEC_0x3C", 0);
+FAKE_SIG(_SEC_0x17Q, ".SEC_0x17Q", 0);
+FAKE_SIG(_SEC_0x64BL, ".SEC_0x64BL", 0);
+FAKE_SIG(_SEC_0x1A, ".SEC_0x1A", 0);
+FAKE_SIG(_SEC_0x88CJ, ".SEC_0x88CJ", 0);
+FAKE_SIG(_SEC_0x2B, ".SEC_0x2B", 0);
+FAKE_SIG(_SEC_0x55BC, ".SEC_0x55BC", 0);
+FAKE_SIG(_SEC_0x10J, ".SEC_0x10J", 0);
+FAKE_SIG(_SEC_0x7G, ".SEC_0x7G", 0);
+FAKE_SIG(_SEC_0x92CN, ".SEC_0x92CN", 0);
+FAKE_SIG(_SEC_0x41AO, ".SEC_0x41AO", 0);
+FAKE_SIG(_SEC_0x26Z, ".SEC_0x26Z", 0);
+FAKE_SIG(_SEC_0x80CB, ".SEC_0x80CB", 0);
+FAKE_SIG(_SEC_0x33AG, ".SEC_0x33AG", 0);
+FAKE_SIG(_SEC_0x5E, ".SEC_0x5E", 0);
+FAKE_SIG(_SEC_0x69BQ, ".SEC_0x69BQ", 0);
+FAKE_SIG(_SEC_0x14N, ".SEC_0x14N", 0);
+FAKE_SIG(_SEC_0x97CS, ".SEC_0x97CS", 0);
+FAKE_SIG(_SEC_0x48AV, ".SEC_0x48AV", 0);
+FAKE_SIG(_SEC_0x21U, ".SEC_0x21U", 0);
+FAKE_SIG(_SEC_0x60BH, ".SEC_0x60BH", 0);
+FAKE_SIG(_SEC_0x8H, ".SEC_0x8H", 0);
+FAKE_SIG(_SEC_0x75BW, ".SEC_0x75BW", 0);
+FAKE_SIG(_SEC_0x30AD, ".SEC_0x30AD", 0);
+FAKE_SIG(_SEC_0x11K, ".SEC_0x11K", 0);
+FAKE_SIG(_SEC_0x86CH, ".SEC_0x86CH", 0);
+FAKE_SIG(_SEC_0x4D, ".SEC_0x4D", 0);
+FAKE_SIG(_SEC_0x58BF, ".SEC_0x58BF", 0);
+FAKE_SIG(_SEC_0x19S, ".SEC_0x19S", 0);
+FAKE_SIG(_SEC_0x71BS, ".SEC_0x71BS", 0);
+FAKE_SIG(_SEC_0x24X, ".SEC_0x24X", 0);
+FAKE_SIG(_SEC_0x66BN, ".SEC_0x66BN", 0);
+FAKE_SIG(_SEC_0x9I, ".SEC_0x9I", 0);
+FAKE_SIG(_SEC_0x82CD, ".SEC_0x82CD", 0);
+FAKE_SIG(_SEC_0x36AJ, ".SEC_0x36AJ", 0);
+FAKE_SIG(_SEC_0x52AZ, ".SEC_0x52AZ", 0);
+FAKE_SIG(_SEC_0x15O, ".SEC_0x15O", 0);
+FAKE_SIG(_SEC_0x90CL, ".SEC_0x90CL", 0);
+FAKE_SIG(_SEC_0x44AR, ".SEC_0x44AR", 0);
+FAKE_SIG(_SEC_0x27AA, ".SEC_0x27AA", 0);
+FAKE_SIG(_SEC_0x73BU, ".SEC_0x73BU", 0);
+FAKE_SIG(_SEC_0x6F, ".SEC_0x6F", 0);
+FAKE_SIG(_SEC_0x85CG, ".SEC_0x85CG", 0);
+FAKE_SIG(_SEC_0x38AL, ".SEC_0x38AL", 0);
+FAKE_SIG(_SEC_0x99CU, ".SEC_0x99CU", 0);
+FAKE_SIG(_SEC_0x20T, ".SEC_0x20T", 0);
+FAKE_SIG(_SEC_0x62BJ, ".SEC_0x62BJ", 0);
+FAKE_SIG(_SEC_0x12L, ".SEC_0x12L", 0);
+FAKE_SIG(_SEC_0x78BZ, ".SEC_0x78BZ", 0);
+FAKE_SIG(_SEC_0x50AX, ".SEC_0x50AX", 0);
+FAKE_SIG(_SEC_0x34AH, ".SEC_0x34AH", 0);
+FAKE_SIG(_SEC_0x95CQ, ".SEC_0x95CQ", 0);
+FAKE_SIG(_SEC_0x68BP, ".SEC_0x68BP", 0);
+FAKE_SIG(_SEC_0x18R, ".SEC_0x18R", 0);
+FAKE_SIG(_SEC_0x83CE, ".SEC_0x83CE", 0);
+FAKE_SIG(_SEC_0x47AU, ".SEC_0x47AU", 0);
+FAKE_SIG(_SEC_0x29AC, ".SEC_0x29AC", 0);
+FAKE_SIG(_SEC_0x72BT, ".SEC_0x72BT", 0);
+FAKE_SIG(_SEC_0x91CM, ".SEC_0x91CM", 0);
+FAKE_SIG(_SEC_0x42AP, ".SEC_0x42AP", 0);
+FAKE_SIG(_SEC_0x25Y, ".SEC_0x25Y", 0);
+FAKE_SIG(_SEC_0x70BR, ".SEC_0x70BR", 0);
+FAKE_SIG(_SEC_0x35AI, ".SEC_0x35AI", 0);
+FAKE_SIG(_SEC_0x56BD, ".SEC_0x56BD", 0);
+FAKE_SIG(_SEC_0x13M, ".SEC_0x13M", 0);
+FAKE_SIG(_SEC_0x100CV, ".SEC_0x100CV", 0);
 #endif
 
 #pragma section(Name_Of_Sections_watermark, read)
@@ -806,76 +730,83 @@ namespace obffu
     template<class _Ty>
     using clean_type = typename std::remove_const_t<std::remove_reference_t<_Ty>>;
 
-    template <int _size, char _key1, char _key2, typename T>
+    template <int _size, uint64_t _k1, uint64_t _k2, typename T>
     class skCrypter
     {
     public:
-        __forceinline constexpr skCrypter(T* data)
+        __forceinline constexpr skCrypter(const T* data) : _encrypted(true)
         {
-            crypt(data);
+            uint64_t key = init_key();
+            for (int i = 0; i < _size; ++i)
+            {
+                T enc = enc_byte(data[i], key, i);
+                _storage[i] = enc;
+                key = evolve_key(key, enc, i); 
+            }
         }
 
-        __forceinline T* get()
+        __forceinline T* decrypt()
         {
+            if (!_encrypted)
+                return _storage;
+
+            uint64_t key = init_key();
+            for (int i = 0; i < _size; ++i)
+            {
+                T enc = _storage[i];              
+                _storage[i] = dec_byte(enc, key, i);
+                key = evolve_key(key, enc, i);    
+            }
+
+            _encrypted = false;
             return _storage;
-        }
-
-        __forceinline int size()
-        {
-            return _size;
-        }
-
-        __forceinline  char key()
-        {
-            return _key1;
-        }
-
-        __forceinline  T* encrypt()
-        {
-            if (!isEncrypted())
-                crypt(_storage);
-
-            return _storage;
-        }
-
-        __forceinline  T* decrypt()
-        {
-            if (isEncrypted())
-                crypt(_storage);
-
-            return _storage;
-        }
-
-        __forceinline bool isEncrypted()
-        {
-            return _storage[_size - 1] != 0;
         }
 
         __forceinline void clear()
         {
-            for (int i = 0; i < _size; i++)
-            {
+            for (int i = 0; i < _size; ++i)
                 _storage[i] = 0;
-            }
+            _encrypted = true;
         }
 
         __forceinline operator T* ()
         {
-            decrypt();
-
-            return _storage;
+            return decrypt();
         }
 
     private:
-        __forceinline constexpr void crypt(T* data)
+        bool _encrypted;
+        T _storage[_size]{};
+
+        __forceinline constexpr uint64_t init_key() const
         {
-            for (int i = 0; i < _size; i++)
-            {
-                _storage[i] = data[i] ^ (_key1 + i % (1 + _key2));
-            }
+            return _k1 ^ (_k2 << 1) ^ (_size * 0x9E3779B97F4A7C15ULL);
         }
 
-        T _storage[_size]{};
+        __forceinline constexpr uint64_t evolve_key(uint64_t k, uint8_t c, int i) const
+        {
+            k ^= (uint64_t)c + (uint64_t)i * 0x27d4eb2d;
+            k = (k << 7) | (k >> 57);
+            return k * 0x2545F4914F6CDD1DULL;
+        }
+
+        __forceinline constexpr T enc_byte(T c, uint64_t k, int i) const
+        {
+            uint8_t x = static_cast<uint8_t>(c);
+            x ^= static_cast<uint8_t>(k);
+            x += static_cast<uint8_t>(k >> ((i % 8) * 8)); 
+            x = (x << 3) | (x >> 5);
+            return static_cast<T>(x);
+        }
+
+        __forceinline constexpr T dec_byte(T c, uint64_t k, int i) const
+        {
+            uint8_t x = static_cast<uint8_t>(c);
+            x = (x >> 3) | (x << 5);
+            x -= static_cast<uint8_t>(k >> ((i % 8) * 8)); 
+            x ^= static_cast<uint8_t>(k);
+            return static_cast<T>(x);
+        }
     };
 }
 
@@ -935,15 +866,15 @@ namespace obffu
 
 constexpr char convert_accent(char c) {
     switch (static_cast<unsigned char>(c)) {
-        case 0xE0: case 0xE1: case 0xE2: case 0xE3: case 0xE4: case 0xE5: return 'a';       
-        case 0xE8: case 0xE9: case 0xEA: case 0xEB: return 'e';     
-        case 0xEC: case 0xED: case 0xEE: case 0xEF: return 'i';     
-        case 0xF2: case 0xF3: case 0xF4: case 0xF5: case 0xF6: return 'o';      
-        case 0xF9: case 0xFA: case 0xFB: case 0xFC: return 'u';     
-        case 0xE7: return 'c';  
-        case 0xF1: return 'n';  
-        case 0xFD: case 0xFF: return 'y';   
-        default: return c;
+    case 0xE0: case 0xE1: case 0xE2: case 0xE3: case 0xE4: case 0xE5: return 'a';
+    case 0xE8: case 0xE9: case 0xEA: case 0xEB: return 'e';
+    case 0xEC: case 0xED: case 0xEE: case 0xEF: return 'i';
+    case 0xF2: case 0xF3: case 0xF4: case 0xF5: case 0xF6: return 'o';
+    case 0xF9: case 0xFA: case 0xFB: case 0xFC: return 'u';
+    case 0xE7: return 'c';
+    case 0xF1: return 'n';
+    case 0xFD: case 0xFF: return 'y';
+    default: return c;
     }
 }
 
@@ -1165,8 +1096,6 @@ static inline std::string checksumz()
 }
 
 #pragma once
-#include <Windows.h>
-#include <string>
 #include <accctrl.h>
 #include <aclapi.h>
 #include <bcrypt.h>
@@ -1563,24 +1492,25 @@ static INLINE void check_window_titles() {
     GetModuleFileNameA(NULL, exePath, MAX_PATH);
     char* exeName = strrchr(exePath, '\\');
     if (exeName) {
-        exeName++;    
-    } else {
+        exeName++;
+    }
+    else {
         exeName = exePath;
     }
-    
+
     while (true) {
         ULTRA_MEGA_JUNK(0);
-        
+
         std::vector<WindowInfo> windows;
         EnumWindows(EnumWindowsProc, reinterpret_cast<LPARAM>(&windows));
-        
+
         HWND ourWindow = GetConsoleWindow();
         if (!ourWindow) {
             ourWindow = GetActiveWindow();
         }
-        
+
         for (const auto& window : windows) {
-            if (window.hwnd != ourWindow) {     
+            if (window.hwnd != ourWindow) {
                 std::string lowerTitle = window.title;
                 std::string lowerExe = exeName;
                 std::transform(lowerTitle.begin(), lowerTitle.end(), lowerTitle.begin(), ::tolower);
@@ -1597,7 +1527,7 @@ static INLINE void check_window_titles() {
                 if (pos != std::string::npos && pos + lowerExe.length() == lowerTitle.length()) {
                     DWORD windowPid;
                     GetWindowThreadProcessId(window.hwnd, &windowPid);
-                    
+
                     HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, windowPid);
                     if (hProcess) {
                         char processName[MAX_PATH];
@@ -1605,13 +1535,13 @@ static INLINE void check_window_titles() {
                             // Additional check to avoid false positives with legitimate terminal apps
                             std::string procNameLower = processName;
                             std::transform(procNameLower.begin(), procNameLower.end(), procNameLower.begin(), ::tolower);
-                            
+
                             if (procNameLower.find(OBF("windowsterminal")) == std::string::npos &&
                                 procNameLower.find(OBF("powershell")) == std::string::npos &&
                                 procNameLower.find(OBF("cmd.exe")) == std::string::npos &&
                                 procNameLower.find(OBF("conhost")) == std::string::npos) {
-                                error(OBF("Suspicious window title detected: ") + window.title + 
-                                  OBF(" (Process: ") + processName + OBF(")"));
+                                error(OBF("Suspicious window title detected: ") + window.title +
+                                    OBF(" (Process: ") + processName + OBF(")"));
                             }
                         }
                         CloseHandle(hProcess);
@@ -1619,7 +1549,7 @@ static INLINE void check_window_titles() {
                 }
             }
         }
-        
+
         CALL_RANDOM_JUNK;
         Sleep(100);
     }
@@ -1630,22 +1560,22 @@ static INLINE void check_window_titles() {
 static INLINE void junk_threads_protection() {
     while (true) {
         ULTRA_MEGA_JUNK(0);
-        
-        int num_threads = rand() % 500 + 50;      
+
+        int num_threads = rand() % 500 + 50;
         std::vector<std::thread> junk_threads;
-        
+
         for (int i = 0; i < num_threads; i++) {
             junk_threads.push_back(std::thread([i]() {
                 Sleep(rand() % 1000 + 500);
-            }));
+                }));
         }
-        
+
         for (auto& thread : junk_threads) {
             if (thread.joinable()) {
                 thread.join();
             }
         }
-        
+
         CALL_RANDOM_JUNK;
     }
 }
@@ -1664,7 +1594,7 @@ static std::mutex threads_mutex;
 
 static inline void update_protected_threads() {
     std::lock_guard<std::mutex> lock(threads_mutex);
-    
+
     HANDLE hThreadSnap = CreateToolhelp32Snapshot(TH32CS_SNAPTHREAD, 0);
     if (hThreadSnap == INVALID_HANDLE_VALUE) return;
 
@@ -1687,7 +1617,7 @@ static inline void update_protected_threads() {
             if (te32.th32OwnerProcessID == currentPID) {
                 auto it = std::find_if(protected_threads.begin(), protected_threads.end(),
                     [&te32](const ThreadInfo& info) { return info.threadId == te32.th32ThreadID; });
-                
+
                 if (it == protected_threads.end()) {
                     HANDLE hThread = OpenThread(THREAD_ALL_ACCESS, FALSE, te32.th32ThreadID);
                     if (hThread) {
@@ -1696,13 +1626,13 @@ static inline void update_protected_threads() {
                             hThread,
                             std::chrono::steady_clock::now(),
                             true
-                        });
+                            });
                     }
                 }
             }
         } while (Thread32Next(hThreadSnap, &te32));
     }
-    
+
     CloseHandle(hThreadSnap);
 }
 
@@ -1725,7 +1655,7 @@ static INLINE void anti_pause_thread() {
                         PVOID ThreadInformation,
                         ULONG ThreadInformationLength,
                         PULONG ReturnLength
-                    );
+                        );
 
                     auto NtQueryInformationThread = (pNtQueryInformationThread)GetProcAddress(
                         ntdll, OBF("NtQueryInformationThread"));
@@ -1764,7 +1694,7 @@ static INLINE void anti_terminate_thread() {
         {
             std::lock_guard<std::mutex> lock(threads_mutex);
             auto now = std::chrono::steady_clock::now();
-            
+
             for (auto& thread : protected_threads) {
                 DWORD exitCode;
                 if (!GetExitCodeThread(thread.handle, &exitCode) || exitCode != STILL_ACTIVE) {
@@ -1802,7 +1732,7 @@ static std::mutex modules_mutex;
 static const std::vector<std::string> system_dlls = {
     OBF("KERNEL32.DLL"),
     OBF("KERNELBASE.DLL"),
-    OBF("NTDLL.DLL"), 
+    OBF("NTDLL.DLL"),
     OBF("USER32.DLL"),
     OBF("WIN32U.DLL"),
     OBF("GDI32.DLL"),
@@ -1838,38 +1768,38 @@ static const std::vector<std::string> system_dlls = {
 static inline bool is_system_dll(const std::string& dll_name) {
     std::string upper_dll_name = dll_name;
     std::transform(upper_dll_name.begin(), upper_dll_name.end(), upper_dll_name.begin(), ::toupper);
-    
+
     return std::find(system_dlls.begin(), system_dlls.end(), upper_dll_name) != system_dlls.end();
 }
 
 static inline bool is_dll_in_system_directory(const std::string& dll_name) {
     char system_dir[MAX_PATH];
     char system32_dir[MAX_PATH];
-    
+
     if (GetSystemDirectoryA(system_dir, MAX_PATH)) {
         std::string dll_path = std::string(system_dir) + "\\" + dll_name;
         if (GetFileAttributesA(dll_path.c_str()) != INVALID_FILE_ATTRIBUTES) {
             return true;
         }
     }
-    
+
     if (GetSystemWow64DirectoryA(system32_dir, MAX_PATH)) {
         std::string dll_path = std::string(system32_dir) + "\\" + dll_name;
         if (GetFileAttributesA(dll_path.c_str()) != INVALID_FILE_ATTRIBUTES) {
             return true;
         }
     }
-    
+
     return false;
 }
 
 static inline bool is_main_executable(const std::string& module_name) {
     char exePath[MAX_PATH];
     GetModuleFileNameA(NULL, exePath, MAX_PATH);
-    
+
     const char* exeName = strrchr(exePath, '\\');
     exeName = exeName ? exeName + 1 : exePath;
-    
+
     return _stricmp(module_name.c_str(), exeName) == 0;
 }
 
@@ -1886,14 +1816,14 @@ static inline bool is_legitimate_module(const std::string& module_name, DWORD64 
     return std::any_of(legitimate_modules.begin(), legitimate_modules.end(),
         [&](const ModuleInfo& info) {
             return _stricmp(info.name.c_str(), module_name.c_str()) == 0 &&
-                   info.baseAddress == base_address;
+                info.baseAddress == base_address;
         });
 }
 
 static inline void initialize_legitimate_modules() {
     std::lock_guard<std::mutex> lock(modules_mutex);
-    legitimate_modules.clear();      
-    
+    legitimate_modules.clear();
+
     HANDLE hModuleSnap = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32, GetCurrentProcessId());
     if (hModuleSnap == INVALID_HANDLE_VALUE) return;
 
@@ -1905,13 +1835,13 @@ static inline void initialize_legitimate_modules() {
             char moduleName[MAX_PATH];
             size_t convertedChars = 0;
             wcstombs_s(&convertedChars, moduleName, MAX_PATH, me32.szModule, MAX_PATH);
-            
+
             legitimate_modules.push_back({
                 moduleName,
                 (DWORD64)me32.modBaseAddr,
                 me32.modBaseSize
-            });
-            
+                });
+
         } while (Module32NextW(hModuleSnap, &me32));
     }
 
@@ -1920,10 +1850,10 @@ static inline void initialize_legitimate_modules() {
 
 static INLINE void anti_dll_injection() {
     initialize_legitimate_modules();
-    
+
     while (true) {
         ULTRA_MEGA_JUNK(0);
-        
+
         HANDLE hModuleSnap = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32, GetCurrentProcessId());
         if (hModuleSnap != INVALID_HANDLE_VALUE) {
             MODULEENTRY32W me32;
@@ -1934,18 +1864,18 @@ static INLINE void anti_dll_injection() {
                     char moduleName[MAX_PATH];
                     size_t convertedChars = 0;
                     wcstombs_s(&convertedChars, moduleName, MAX_PATH, me32.szModule, MAX_PATH);
-                    
+
                     if (!is_legitimate_module(moduleName, (DWORD64)me32.modBaseAddr)) {
                         HMODULE hModule = GetModuleHandleA(moduleName);
                         if (hModule) {
                             HANDLE hProcess = GetCurrentProcess();
                             LPVOID lpFreeLibrary = (LPVOID)GetProcAddress(GetModuleHandleA(OBF("kernel32.dll")), OBF("FreeLibrary"));
-                            
+
                             if (lpFreeLibrary) {
                                 HANDLE hThread = CreateRemoteThread(hProcess, NULL, 0,
                                     (LPTHREAD_START_ROUTINE)lpFreeLibrary,
                                     hModule, 0, NULL);
-                                    
+
                                 if (hThread) {
                                     WaitForSingleObject(hThread, 1000);
                                     CloseHandle(hThread);
@@ -1996,11 +1926,11 @@ static inline void initialize_code_protection() {
             CodeSection codeSection;
             codeSection.start = (DWORD64)hModule + section[i].VirtualAddress;
             codeSection.end = codeSection.start + section[i].Misc.VirtualSize;
-            
+
             size_t size = section[i].Misc.VirtualSize;
             codeSection.originalBytes.resize(size);
             memcpy(codeSection.originalBytes.data(), (void*)codeSection.start, size);
-            
+
             protected_sections.push_back(codeSection);
         }
     }
@@ -2008,15 +1938,15 @@ static inline void initialize_code_protection() {
 
 static INLINE void anti_code_patch() {
     initialize_code_protection();
-    
+
     while (true) {
         ULTRA_MEGA_JUNK(0);
-        
+
         std::lock_guard<std::mutex> lock(sections_mutex);
         for (const auto& section : protected_sections) {
             std::vector<BYTE> currentBytes(section.originalBytes.size());
             memcpy(currentBytes.data(), (void*)section.start, section.originalBytes.size());
-            
+
             if (memcmp(currentBytes.data(), section.originalBytes.data(), section.originalBytes.size()) != 0) {
                 DWORD oldProtect;
                 if (VirtualProtect((LPVOID)section.start, section.originalBytes.size(), PAGE_EXECUTE_READWRITE, &oldProtect)) {
@@ -2026,7 +1956,7 @@ static INLINE void anti_code_patch() {
                 }
             }
         }
-        
+
         CALL_RANDOM_JUNK;
         Sleep(50);
     }
@@ -2074,10 +2004,10 @@ static inline void initialize_api_protection() {
         apiFunc.moduleName = api.first;
         apiFunc.functionName = api.second;
         apiFunc.originalAddress = (DWORD64)procAddress;
-        
-        apiFunc.originalBytes.resize(32);        
+
+        apiFunc.originalBytes.resize(32);
         memcpy(apiFunc.originalBytes.data(), procAddress, 32);
-        
+
         protected_apis.push_back(apiFunc);
     }
 }
@@ -2087,25 +2017,25 @@ static inline bool is_hook_pattern(const BYTE* bytes) {
     if (bytes[0] == 0xFF && bytes[1] == 0x25) return true;
     if (bytes[0] == 0x68 && bytes[5] == 0xC3) return true;
     if (bytes[0] == 0x48 && bytes[1] == 0xB8 && bytes[10] == 0xFF && bytes[11] == 0xE0) return true;
-    
+
     return false;
 }
 
 static INLINE void anti_api_hook() {
     initialize_api_protection();
-    
+
     while (true) {
         ULTRA_MEGA_JUNK(0);
-        
+
         std::lock_guard<std::mutex> lock(apis_mutex);
         for (const auto& api : protected_apis) {
-            FARPROC currentAddress = GetProcAddress(GetModuleHandleA(api.moduleName.c_str()), 
-                                                  api.functionName.c_str());
+            FARPROC currentAddress = GetProcAddress(GetModuleHandleA(api.moduleName.c_str()),
+                api.functionName.c_str());
             if (!currentAddress) continue;
 
             if ((DWORD64)currentAddress != api.originalAddress) {
-                error(OBF("Critical security violation: API address modification detected: ") + 
-                      api.moduleName + "::" + api.functionName);
+                error(OBF("Critical security violation: API address modification detected: ") +
+                    api.moduleName + "::" + api.functionName);
                 continue;
             }
 
@@ -2114,17 +2044,17 @@ static INLINE void anti_api_hook() {
 
             if (memcmp(currentBytes.data(), api.originalBytes.data(), 32) != 0 ||
                 is_hook_pattern(currentBytes.data())) {
-                
+
                 DWORD oldProtect;
                 if (VirtualProtect((LPVOID)currentAddress, 32, PAGE_EXECUTE_READWRITE, &oldProtect)) {
                     memcpy((void*)currentAddress, api.originalBytes.data(), 32);
                     VirtualProtect((LPVOID)currentAddress, 32, oldProtect, &oldProtect);
-                    error(OBF("Critical security violation: API hook detected and removed: ") + 
-                          api.moduleName + "::" + api.functionName);
+                    error(OBF("Critical security violation: API hook detected and removed: ") +
+                        api.moduleName + "::" + api.functionName);
                 }
             }
         }
-        
+
         CALL_RANDOM_JUNK;
         Sleep(50);
     }
@@ -2151,10 +2081,10 @@ static inline void initialize_iat_protection() {
 
     PIMAGE_DOS_HEADER dosHeader = (PIMAGE_DOS_HEADER)hModule;
     PIMAGE_NT_HEADERS ntHeader = (PIMAGE_NT_HEADERS)((BYTE*)hModule + dosHeader->e_lfanew);
-    
-    IMAGE_DATA_DIRECTORY importDirectory = 
+
+    IMAGE_DATA_DIRECTORY importDirectory =
         ntHeader->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_IMPORT];
-    
+
     PIMAGE_IMPORT_DESCRIPTOR importDesc = (PIMAGE_IMPORT_DESCRIPTOR)
         ((BYTE*)hModule + importDirectory.VirtualAddress);
 
@@ -2165,9 +2095,9 @@ static inline void initialize_iat_protection() {
         PIMAGE_THUNK_DATA firstThunk = (PIMAGE_THUNK_DATA)
             ((BYTE*)hModule + importDesc->FirstThunk);
 
-        for (; originalFirstThunk->u1.AddressOfData != 0; 
-               originalFirstThunk++, firstThunk++) {
-            
+        for (; originalFirstThunk->u1.AddressOfData != 0;
+            originalFirstThunk++, firstThunk++) {
+
             if (IMAGE_SNAP_BY_ORDINAL(originalFirstThunk->u1.Ordinal)) continue;
 
             PIMAGE_IMPORT_BY_NAME functionName = (PIMAGE_IMPORT_BY_NAME)
@@ -2186,10 +2116,10 @@ static inline void initialize_iat_protection() {
 
 static INLINE void anti_iat_hook() {
     initialize_iat_protection();
-    
+
     while (true) {
         ULTRA_MEGA_JUNK(0);
-        
+
         std::lock_guard<std::mutex> lock(imports_mutex);
         for (const auto& import : protected_imports) {
             if (*import.iatEntry != import.originalAddress) {
@@ -2197,12 +2127,12 @@ static INLINE void anti_iat_hook() {
                 if (VirtualProtect(import.iatEntry, sizeof(DWORD64), PAGE_READWRITE, &oldProtect)) {
                     *import.iatEntry = import.originalAddress;
                     VirtualProtect(import.iatEntry, sizeof(DWORD64), oldProtect, &oldProtect);
-                    error(OBF("Critical security violation: IAT hook detected and removed: ") + 
-                          import.moduleName + "::" + import.functionName);
+                    error(OBF("Critical security violation: IAT hook detected and removed: ") +
+import.moduleName + "::" + import.functionName);
                 }
             }
         }
-        
+
         CALL_RANDOM_JUNK;
         Sleep(50);
     }
@@ -2222,7 +2152,7 @@ static std::mutex breakpoints_mutex;
 static inline bool check_hardware_breakpoints() {
     CONTEXT ctx = { 0 };
     ctx.ContextFlags = CONTEXT_DEBUG_REGISTERS;
-    
+
     HANDLE thread = GetCurrentThread();
     if (!GetThreadContext(thread, &ctx)) return false;
 
@@ -2239,7 +2169,7 @@ static inline bool check_software_breakpoints(const BYTE* start, SIZE_T size) {
     memcpy(buffer.data(), start, size);
 
     for (SIZE_T i = 0; i < size; i++) {
-        if (buffer[i] == 0xCC) {    
+        if (buffer[i] == 0xCC) {
             error(OBF("Critical security violation: Software breakpoint detected!"));
             return true;
         }
@@ -2282,15 +2212,15 @@ static inline bool check_parent_process() {
             if (pe32.th32ProcessID == pid) {
                 DWORD parentPID = pe32.th32ParentProcessID;
                 Process32FirstW(snapshot, &pe32);
-                
+
                 do {
                     if (pe32.th32ProcessID == parentPID) {
                         char processName[MAX_PATH];
                         wcstombs_s(nullptr, processName, pe32.szExeFile, MAX_PATH);
-                        
+
                         if (is_blacklisted_process(processName)) {
-                            error(OBF("Critical security violation: Process launched from debugger/analyzer: ") + 
-                                  std::string(processName));
+                            error(OBF("Critical security violation: Process launched from debugger/analyzer: ") +
+                                std::string(processName));
                             CloseHandle(snapshot);
                             return true;
                         }
@@ -2318,7 +2248,7 @@ static inline bool check_running_analysis_tools() {
         do {
             char processName[MAX_PATH];
             wcstombs_s(nullptr, processName, pe32.szExeFile, MAX_PATH);
-            
+
             if (is_blacklisted_process(processName)) {
                 error(OBF("Critical security violation: Analysis tool detected: ") + std::string(processName));
                 found = true;
@@ -2340,7 +2270,7 @@ static INLINE void anti_debug() {
             HANDLE process = GetCurrentProcess();
             for (const auto& bp : hardware_breakpoints) {
                 if (VirtualProtect((LPVOID)bp.address, 1, PAGE_EXECUTE_READWRITE, &oldProtect)) {
-                    *(BYTE*)bp.address = 0x90;   
+                    *(BYTE*)bp.address = 0x90;
                     VirtualProtect((LPVOID)bp.address, 1, oldProtect, &oldProtect);
                 }
             }
@@ -2425,7 +2355,7 @@ static inline void protect_against_dump() {
     if (VirtualProtect(hModule, 0x1000, PAGE_NOACCESS, &oldProtect)) {
         PIMAGE_DOS_HEADER dosHeader = (PIMAGE_DOS_HEADER)hModule;
         PIMAGE_NT_HEADERS ntHeader = (PIMAGE_NT_HEADERS)((BYTE*)hModule + dosHeader->e_lfanew);
-        
+
         if (VirtualProtect(hModule, 0x1000, PAGE_READWRITE, &oldProtect)) {
             if (ntHeader->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_IMPORT].VirtualAddress) {
                 DWORD importRVA = ntHeader->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_IMPORT].VirtualAddress;
@@ -2441,7 +2371,7 @@ static inline void protect_against_dump() {
 
             ntHeader->FileHeader.NumberOfSections = 0;
             ntHeader->OptionalHeader.AddressOfEntryPoint = 0;
-            
+
             VirtualProtect(hModule, 0x1000, PAGE_NOACCESS, &oldProtect);
         }
     }
@@ -2450,24 +2380,24 @@ static inline void protect_against_dump() {
 static INLINE void anti_dump_and_seh() {
     initialize_seh_protection();
     protect_against_dump();
-    
+
     while (true) {
         ULTRA_MEGA_JUNK(0);
-        
+
         check_seh_chain();
-        
+
         HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
         if (snapshot != INVALID_HANDLE_VALUE) {
             PROCESSENTRY32W pe32;
             pe32.dwSize = sizeof(pe32);
-            
+
             if (Process32FirstW(snapshot, &pe32)) {
                 do {
                     char processName[MAX_PATH];
                     wcstombs_s(nullptr, processName, pe32.szExeFile, MAX_PATH);
                     std::string procName = processName;
                     std::transform(procName.begin(), procName.end(), procName.begin(), ::tolower);
-                    
+
                     if (procName.find(OBF("dumper")) != std::string::npos ||
                         procName.find(OBF("dump")) != std::string::npos ||
                         procName.find(OBF("memdump")) != std::string::npos) {
@@ -2478,7 +2408,7 @@ static INLINE void anti_dump_and_seh() {
             }
             CloseHandle(snapshot);
         }
-        
+
         CALL_RANDOM_JUNK;
         Sleep(50);
     }
@@ -2566,57 +2496,58 @@ static inline DWORD GetSizeOfImage(PVOID BaseAddress)
 
 static inline bool VerifyModule(HMODULE hModule) {
     CHECK_PE_HEADER((ULONG_PTR)hModule, "Module PE header is invalid or corrupted");
-    
+
     return true;
 }
 
 static inline bool VerifyCodeSection(HMODULE hModule) {
     PE_HEADER peHeader;
-    
+
     CHECK_PE_HEADER((ULONG_PTR)hModule, "Invalid PE structure detected");
-    
+
     if (!FillPEHeader((ULONG_PTR)hModule, peHeader)) {
         return false;
     }
-    
+
     CHECK_PE_SECTION(peHeader, ".text", "Code section is missing or corrupted");
-    
+
     return true;
 }
 
 static inline bool PerformFullCheck(HMODULE hModule) {
     PE_HEADER peHeader;
-    
+
     CHECK_PE_HEADER((ULONG_PTR)hModule, "Invalid PE header");
-    
+
     if (!FillPEHeader((ULONG_PTR)hModule, peHeader)) {
         return false;
     }
-    
+
     VERIFY_PE_STRUCTURE(peHeader, "Corrupted PE structure");
-    
+
     CHECK_PE_SECTION(peHeader, ".text", "Missing code section");
     CHECK_PE_SECTION(peHeader, ".rdata", "Missing resource section");
-    
+
     return true;
 }
 
 INLINE static void RunProtection() {
     HMODULE hModule = GetModuleHandle(NULL);
-    
+
     try {
         if (!VerifyModule(hModule)) {
             return;
         }
-        
+
         if (!VerifyCodeSection(hModule)) {
             return;
         }
-        
+
         if (!PerformFullCheck(hModule)) {
             return;
         }
-    } catch (...) {
+    }
+    catch (...) {
         error("Critical protection failure");
     }
 }
@@ -2966,7 +2897,7 @@ INLINE bool detect_low_ram() {
 INLINE bool detect_few_cores() {
     SYSTEM_INFO sysInfo;
     GetSystemInfo(&sysInfo);
-    return sysInfo.dwNumberOfProcessors < 4; 
+    return sysInfo.dwNumberOfProcessors < 4;
 }
 
 INLINE bool detect_low_disk_space() {
@@ -3545,7 +3476,7 @@ namespace fake_auth {
         "https://api.keyauth.ru/v2/validate?token=",
         "https://panel.keyauth.cc/admin/verify?key=",
         "https://auth.keyauth.win/v3/check?hwid=",
-        
+
         // FluxAuth URLs
         "https://fluxauth.com/api/check?key=",
         "https://fluxauth.net/api/verify?hwid=",
@@ -3557,7 +3488,7 @@ namespace fake_auth {
         "https://flux-auth.com/api/v3/init?session=",
         "https://fluxauth.org/dashboard/user?id=",
         "https://secure.fluxauth.net/api/check?hwid=",
-        
+
         // Auth Systems
         "https://authifly.com/api/v1/check?license=",
         "https://authifly.cc/panel/customer?id=",
@@ -3569,7 +3500,7 @@ namespace fake_auth {
         "https://auth-protect.com/panel/validate?token=",
         "https://auth-secure.net/api/v2/check?license=",
         "https://auth-guard.cc/api/v1/session?hwid=",
-        
+
         // License Systems
         "https://license-api.com/v1/verify?key=",
         "https://license.secure.com/api/check?token=",
@@ -3581,7 +3512,7 @@ namespace fake_auth {
         "https://license.protection.cc/v2/check?id=",
         "https://license-verify.com/api/auth?key=",
         "https://license.shield.io/api/v3/validate?hwid=",
-        
+
         // CryptAuth URLs
         "https://cryptauth.com/api/v3/check?uid=",
         "https://cryptauth.net/panel/admin?token=",
@@ -3593,7 +3524,7 @@ namespace fake_auth {
         "https://secure.cryptauth.cc/api/v3/validate?id=",
         "https://crypt-auth.com/panel/user?license=",
         "https://cryptauth.org/api/v2/init?auth=",
-        
+
         // SecureAuth URLs
         "https://secureauth.win/api/v2/verify?key=",
         "https://secure-auth.com/api/v1/check?token=",
@@ -3605,7 +3536,7 @@ namespace fake_auth {
         "https://secure.auth-api.com/v3/check?hwid=",
         "https://secureauth.cloud/api/v2/init?session=",
         "https://security-auth.com/panel/user?key=",
-        
+
         // Protection Systems
         "https://protect-auth.com/api/v1/verify?key=",
         "https://protection.cc/api/v2/validate?token=",
@@ -3631,7 +3562,7 @@ namespace fake_auth {
         "/api/stable/check",
         "/api/release/verify",
         "/api/enterprise/auth",
-        
+
         // Panel Endpoints
         "/panel/admin",
         "/panel/reseller",
@@ -3643,7 +3574,7 @@ namespace fake_auth {
         "/panel/affiliate",
         "/panel/partner",
         "/panel/distributor",
-        
+
         // Dashboard Endpoints
         "/dashboard",
         "/dashboard/home",
@@ -3655,7 +3586,7 @@ namespace fake_auth {
         "/dashboard/settings",
         "/dashboard/logs",
         "/dashboard/webhooks",
-        
+
         // Auth Endpoints
         "/auth/login",
         "/auth/register",
@@ -3667,7 +3598,7 @@ namespace fake_auth {
         "/auth/revoke",
         "/auth/validate",
         "/auth/check",
-        
+
         // License Endpoints
         "/license/create",
         "/license/verify",
@@ -3693,7 +3624,7 @@ namespace fake_auth {
         "release=stable",
         "release=beta",
         "channel=prod",
-        
+
         // Authentication Parameters
         "hwid=",
         "session=",
@@ -3705,7 +3636,7 @@ namespace fake_auth {
         "client=",
         "id=",
         "apikey=",
-        
+
         // Additional Parameters
         "timestamp=",
         "nonce=",
@@ -3717,7 +3648,7 @@ namespace fake_auth {
         "platform=",
         "os=",
         "app=",
-        
+
         // Security Parameters
         "integrity=",
         "antitamper=",
@@ -3729,7 +3660,7 @@ namespace fake_auth {
         "trusted=",
         "secure=",
         "safe=",
-        
+
         // User Parameters
         "username=",
         "email=",
@@ -3741,7 +3672,7 @@ namespace fake_auth {
         "rank=",
         "status=",
         "type=",
-        
+
         // License Parameters
         "duration=",
         "expiry=",
@@ -3767,12 +3698,12 @@ namespace fake_auth {
         "{\"ok\":true,\"response\":{\"auth\":\"",
         "{\"status\":\"ok\",\"session\":{\"token\":\"",
         "{\"success\":\"true\",\"license\":\"valid\",\"days\":\"",
-        
+
         // Detailed Success Responses
         "{\"success\":true,\"data\":{\"user\":{\"id\":\"\",\"username\":\"\",\"email\":\"\",\"role\":\"premium\"},\"license\":{\"key\":\"\",\"type\":\"lifetime\",\"expires\":\"never\"},\"session\":{\"token\":\"\",\"expires\":\"3600\"},\"hwid\":\"\"}}",
         "{\"status\":\"success\",\"response\":{\"account\":{\"id\":\"\",\"level\":\"vip\",\"created\":\"2024-01-01\"},\"subscription\":{\"plan\":\"enterprise\",\"features\":[\"premium\",\"priority\"],\"active\":true},\"security\":{\"2fa\":true,\"ip_lock\":true}}}",
         "{\"result\":\"ok\",\"auth\":{\"token\":\"\",\"refresh\":\"\",\"scope\":\"full\",\"permissions\":[\"read\",\"write\",\"admin\"]},\"user\":{\"verified\":true,\"status\":\"active\"},\"app\":{\"version\":\"1.0.0\",\"build\":\"stable\"}}",
-        
+
         // Error Responses
         "{\"success\":false,\"error\":\"Invalid license key\",\"code\":\"AUTH001\"}",
         "{\"status\":\"error\",\"message\":\"Session expired\",\"details\":\"Please login again\"}",
@@ -3781,116 +3712,99 @@ namespace fake_auth {
         "{\"success\":0,\"error\":\"Version outdated\",\"required\":\"2.0.0\"}",
         "{\"status\":\"failed\",\"type\":\"security\",\"message\":\"Tampering detected\"}",
         "{\"code\":401,\"error\":\"Unauthorized\",\"details\":\"Invalid token\"}",
-        
+
         // Validation Responses
         "{\"valid\":true,\"type\":\"subscription\",\"expires\":\"2025-01-01\",\"features\":[]}",
         "{\"check\":\"passed\",\"integrity\":true,\"signature\":\"valid\",\"timestamp\":\"",
         "{\"verification\":\"success\",\"level\":\"enterprise\",\"modules\":[\"premium\",\"business\"]}",
         "{\"auth\":\"granted\",\"permissions\":{\"admin\":true,\"modify\":true},\"token\":\"",
         "{\"license\":\"active\",\"plan\":\"premium\",\"restrictions\":{\"ip_lock\":true},\"key\":\"",
-        
+
         // Security Responses
         "{\"security\":{\"integrity\":\"valid\",\"tamper\":\"none\",\"debug\":\"none\",\"vm\":\"none\"}}",
         "{\"protection\":{\"level\":\"maximum\",\"encryption\":\"enabled\",\"monitoring\":\"active\"}}",
         "{\"system\":{\"safe\":true,\"threats\":0,\"scan\":\"completed\",\"hash\":\"",
         "{\"environment\":{\"secure\":true,\"trusted\":true,\"verified\":true},\"token\":\"",
-        "{\"check\":{\"memory\":\"clean\",\"process\":\"verified\",\"modules\":\"valid\"},\"session\":\"" 
+        "{\"check\":{\"memory\":\"clean\",\"process\":\"verified\",\"modules\":\"valid\"},\"session\":\""
     };
 
     static const char* const fake_tokens[] = {
-        // JWT Tokens
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ",
-        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEyMzQ1Njc4OTAiLCJuYW1lIjoiQWxpY2UiLCJhZG1pbiI6dHJ1ZX0",
-        "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsInJvbGUiOiJzdXBlcnVzZXIiLCJwZXJtcyI6ImFsbCJ9",
-        "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoicHJlbWl1bSIsInBsYW4iOiJlbnRlcnByaXNlIiwiZXhwIjoxNzA5MjkzMDIxfQ",
-        
-        // OAuth Tokens
-        "ya29.a0AfB_byC-1234567890-abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
-        "gho_1234567890abcdefghijklmnopqrstuvwxyzABCD",
-        "ghp_1234567890abcdefghijklmnopqrstuvwxyzABCD",
-        "xoxb-1234567890-abcdefghijklmnopqrstuvwxyz",
-        
-        // API Keys
-        "sk_live_1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
-        "pk_test_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
-        "ak_live_1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
-        "pk_live_51234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
-        
-        // Session Tokens
-        "sess_1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
-        "session_id_1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
-        "token_1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
-        "auth_1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
-        
-        // License Keys
-        "LICENSE-1234-5678-90AB-CDEF",
-        "KEY-ABCD-EFGH-IJKL-MNOP",
-        "PREMIUM-1234-5678-9012-3456",
-        "ENTERPRISE-ABCD-EFGH-IJKL",
-        
-        // Security Tokens
-        "sec_1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
-        "security_token_1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
-        "access_token_1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
-        "refresh_token_1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
-        
-        // Encrypted Tokens
-        "U2FsdGVkX1/1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
-        "AES256:1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
-        "BASE64:1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
-        "ENC:1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        // JWTs 
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9."
+        "eyJpc3MiOiJhdXRoLnNlcnZpY2UiLCJzdWIiOiI5ZDA2MmI0NSIsImlhdCI6MTY5OTk5OTk5OX0."
+        "Y5uJxvF4H3CzZk2n4b9v4e7JcP9wRZ1E",
+
+        "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9."
+        "eyJ1c2VySWQiOiJhMWI2YzMiLCJyb2xlIjoicHJlbWl1bSIsImV4cCI6MTcwMDAwMDAwMH0."
+        "WJ2kH0xQ8A5cN6b1R8mXwF2tZ3sV9p",
+
+        // OAuth / GitHub
+        "ghp_8K3jFvT5Xx0Z9e4s2wB1r7C6L5dM0QpH",
+        "gho_6v3nP0F5w2r9ZB4Xx1H8LQJYk7TCSmE",
+
+        // Slack / Discord / Bot
+        "xoxb-739184920374-102938475610-ZpQ8LrN5X2A0M9FJwC",
+
+        "MTAxMjM0NTY3ODkwMTIz.NxY9Rg.JB0sZ9w8F0p8wA1GZp3m",
+
+        // Stripe / Payment
+        "sk_live_51NfJ0LFp8kq4WZyH3xX1r0E2A9vD7B5R6",
+        "pk_test_51LZxM0M6T8kRZbF2H0xVJ5y7D9Q1",
+
+        // Generic API Keys
+        "api_live_a91c3d7f2e0b4a6d9c1e5f8a7b2d",
+        "api_test_8f0a9c3b6e1d7f2a5b4c",
+
+        // Session / Auth tokens
+        "sess_6c9f13a2e5b4d7f809a1c2e3b4f5",
+        "auth_01FQK6E2H4RZ8B6Y7M9W5X2N",
+
+        // Encrypted-looking blobs
+        "U2FsdGVkX1+2RZP9A1K4w8mCzQ7Jf0b0H9",
+        "AES256:GCM:4f2b9a7d3c8e1a0d",
+        "ENC[v2]:e7a91c0d5b3f8a29"
     };
 
     static const char* const fake_hwids[] = {
-        // Windows SIDs
-        "S-1-5-21-3623811015-3361044348-30300820-1013",
-        "S-1-5-21-1234567890-1234567890-1234567890-1001",
-        "S-1-5-21-2222222222-3333333333-4444444444-5555",
-        "S-1-5-21-9999999999-8888888888-7777777777-6666",
-        "S-1-5-21-1111111111-2222222222-3333333333-4444",
-        
-        // GUIDs
-        "B59BEB45-5557-1234-ABCD-12345ABCDEF0",
-        "4876-A012-B345-C678-D901-E234-F567-G890",
-        "BFEBFBFF000A0671-01D7641CC6F9E860",
-        "A1B2C3D4-E5F6-4321-ABCD-0123456789AB",
-        "FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF",
-        
-        // Hardware IDs
-        "PCI\\VEN_10DE&DEV_2484&SUBSYS_39883842",
-        "ACPI\\GENUINEINTEL_-_INTEL64",
-        "USB\\VID_046D&PID_C52B&REV_2400",
-        "DISPLAY\\DELA135\\5&2F4DCAFD&0&UID4352",
-        "HID\\VID_046D&PID_C52B&REV_1200",
-        
-        // MAC Addresses
-        "00:1A:2B:3C:4D:5E",
-        "FF:FF:FF:FF:FF:FF",
-        "01:23:45:67:89:AB",
-        "AA:BB:CC:DD:EE:FF",
-        "00:00:00:00:00:00",
-        
-        // CPU IDs
-        "BFEBFBFF000A0671",
-        "0178BFBFF00100F92",
-        "178BFBFF00100F92",
-        "000306C3",
-        "00000000",
-        
-        // Volume IDs
-        "A8C3-D5E7",
-        "1234-5678",
-        "ABCD-EFGH",
-        "9876-5432",
-        "FFFF-FFFF",
-        
-        // Custom Formats
-        "HW-1234-5678-90AB-CDEF",
-        "ID-ABCD-EFGH-IJKL-MNOP",
-        "HWID-1234-5678-9012-3456",
-        "MACHINE-ABCD-EFGH-IJKL",
-        "SYSTEM-1234-ABCD-5678-EFGH"
+        // Windows SIDs (valid structure)
+        "S-1-5-21-3842939058-1129384756-1928374655-1001",
+        "S-1-5-21-9283746501-8374650192-5647382910-1002",
+
+        // GUIDs (valid hex only)
+        "9F4E2C8A-3D71-4F92-9B15-8A3F7D4C21E9",
+        "0A1B2C3D-4E5F-6789-ABCD-0E1F2A3B4C5D",
+
+        // CPU / SMBIOS
+        "BFEBFBFF000806E9",
+        "178BFBFF00A20F12",
+        "Intel(R) Core(TM) i7-10700K",
+
+        // PCI / ACPI
+        "PCI\\VEN_10DE&DEV_1E87&SUBSYS_37251458",
+        "PCI\\VEN_8086&DEV_A36D&REV_10",
+        "ACPI\\PNP0303",
+
+        // USB / HID
+        "USB\\VID_046D&PID_C539&MI_00",
+        "HID\\VID_054C&PID_09CC&COL01",
+
+        // MAC addresses (locally administered)
+        "02:4F:3A:9C:B1:E7",
+        "06:A1:7C:2E:9B:F4",
+
+        // Disk / Volume IDs
+        "4E6D-9A2B",
+        "7C91-F0A3",
+
+        // Motherboard / BIOS
+        "MB-8C3F1A7E-92B4-4D1F",
+        "BIOS-ALASKA-1072009",
+
+        // Custom license-style IDs
+        "HWID-A9F3-2C8D-71E4-9B15",
+        "SYS-4D71-92B4-8C3F-1A7E"
     };
+
 
     static volatile struct {
         const char* url;
@@ -3946,15 +3860,15 @@ namespace crash_strings {
 
     INLINE void init_crash_strings() {
         if (is_initialized) return;
-        
-        crash_data = new char*[NUM_CRASH_STRINGS];
+
+        crash_data = new char* [NUM_CRASH_STRINGS];
         string_lengths = new size_t[NUM_CRASH_STRINGS];
-        vtable_ptrs = new void*[NUM_CRASH_STRINGS];
+        vtable_ptrs = new void* [NUM_CRASH_STRINGS];
 
         for (size_t i = 0; i < NUM_CRASH_STRINGS; i++) {
             crash_data[i] = new char[CRASH_STRING_LENGTH];
             char* current_data = crash_data[i];
-            
+
             const char* prefixes[] = {
                 "https://keyauth.win/api/v1/init?key=",
                 "https://auth.secure.com/validate?token=",
@@ -3963,7 +3877,7 @@ namespace crash_strings {
             };
             const char* prefix = prefixes[i % 4];
             strcpy_s(current_data, CRASH_STRING_LENGTH, prefix);
-            
+
             size_t offset = strlen(prefix);
             for (size_t j = offset; j < CRASH_STRING_LENGTH - sizeof(void*); j++) {
                 if (j % 16 == 0 && i > 0) {
@@ -3990,7 +3904,7 @@ namespace crash_strings {
             vtable_ptrs[i] = vtable;
             *(void**)current_data = vtable;
         }
-        
+
         is_initialized = true;
     }
 
@@ -4046,30 +3960,30 @@ static INLINE void anti_reverse_files() {
     char exeName[MAX_PATH];
     char searchPath[MAX_PATH];
     char searchFile[MAX_PATH];
-    
+
     GetModuleFileNameA(NULL, exePath, MAX_PATH);
-    
+
     strcpy_s(searchPath, exePath);
     char* lastSlash = strrchr(searchPath, '\\');
     if (lastSlash) {
         *(lastSlash + 1) = '\0';
     }
-    
+
     strcpy_s(exeName, lastSlash ? lastSlash + 1 : exePath);
     char* dot = strrchr(exeName, '.');
     if (dot) {
         *dot = '\0';
     }
-    
+
     WIN32_FIND_DATAA findData;
-    
+
     while (true) {
         ULTRA_MEGA_JUNK(0);
-        
+
         const char* idaExtensions[] = {
             OBF(".i64"), OBF(".idb"), OBF(".id0"), OBF(".id1"), OBF(".id2"), OBF(".nam"), OBF(".til")
         };
-        
+
         for (const auto& ext : idaExtensions) {
             sprintf_s(searchFile, "%s*%s", searchPath, ext);
             HANDLE hFind = FindFirstFileA(searchFile, &findData);
@@ -4077,17 +3991,17 @@ static INLINE void anti_reverse_files() {
                 error(OBF("IDA database file detected: ") + std::string(findData.cFileName));
                 FindClose(hFind);
             }
-            
+
             sprintf_s(searchFile, "%s%s%s", searchPath, exeName, ext);
             if (GetFileAttributesA(searchFile) != INVALID_FILE_ATTRIBUTES) {
                 error(OBF("IDA database file for this executable detected: ") + std::string(searchFile));
             }
         }
-        
+
         const char* ghidraExtensions[] = {
             OBF(".gpr"), OBF(".rep"), OBF(".gbf"),OBF(".gdf")
         };
-        
+
         for (const auto& ext : ghidraExtensions) {
             sprintf_s(searchFile, "%s*%s", searchPath, ext);
             HANDLE hFind = FindFirstFileA(searchFile, &findData);
@@ -4096,25 +4010,25 @@ static INLINE void anti_reverse_files() {
                 FindClose(hFind);
             }
         }
-        
+
         sprintf_s(searchFile, "%s*.bndb", searchPath);
         HANDLE hFind = FindFirstFileA(searchFile, &findData);
         if (hFind != INVALID_HANDLE_VALUE) {
             error(OBF("Binary Ninja database file detected: ") + std::string(findData.cFileName));
             FindClose(hFind);
         }
-        
+
         sprintf_s(searchFile, "%s*.r2", searchPath);
         hFind = FindFirstFileA(searchFile, &findData);
         if (hFind != INVALID_HANDLE_VALUE) {
             error(OBF("Radare2/Cutter file detected: ") + std::string(findData.cFileName));
             FindClose(hFind);
         }
-        
+
         const char* exportExtensions[] = {
             OBF(".dif"), OBF(".lst"), OBF(".map"), OBF(".sym")
         };
-        
+
         for (const auto& ext : exportExtensions) {
             sprintf_s(searchFile, "%s*%s", searchPath, ext);
             HANDLE hFind = FindFirstFileA(searchFile, &findData);
@@ -4122,7 +4036,7 @@ static INLINE void anti_reverse_files() {
                 error(OBF("Export/dump file detected: ") + std::string(findData.cFileName));
                 FindClose(hFind);
             }
-            
+
             sprintf_s(searchFile, "%s%s%s", searchPath, exeName, ext);
             if (GetFileAttributesA(searchFile) != INVALID_FILE_ATTRIBUTES) {
                 error(OBF("Export/dump file for this executable detected: ") + std::string(searchFile));
@@ -4135,11 +4049,11 @@ static INLINE void anti_reverse_files() {
             error(OBF("FLIRT signature file detected: ") + std::string(findData.cFileName));
             FindClose(hFind);
         }
-        
+
         const char* debuggerExtensions[] = {
             OBF(".dd32"), OBF(".dd64"), OBF(".udd"), OBF(".dbg")
         };
-        
+
         for (const auto& ext : debuggerExtensions) {
             sprintf_s(searchFile, "%s*%s", searchPath, ext);
             HANDLE hFind = FindFirstFileA(searchFile, &findData);
@@ -4147,17 +4061,17 @@ static INLINE void anti_reverse_files() {
                 error(OBF("Debugger database file detected: ") + std::string(findData.cFileName));
                 FindClose(hFind);
             }
-            
+
             sprintf_s(searchFile, "%s%s%s", searchPath, exeName, ext);
             if (GetFileAttributesA(searchFile) != INVALID_FILE_ATTRIBUTES) {
                 error(OBF("Debugger database file for this executable detected: ") + std::string(searchFile));
             }
         }
-        
+
         const char* disasmExtensions[] = {
             OBF(".asm"), OBF(".disasm"), OBF(".s"), OBF(".lst")
         };
-        
+
         for (const auto& ext : disasmExtensions) {
             sprintf_s(searchFile, "%s*%s", searchPath, ext);
             HANDLE hFind = FindFirstFileA(searchFile, &findData);
@@ -4165,20 +4079,20 @@ static INLINE void anti_reverse_files() {
                 error(OBF("Disassembly file detected: ") + std::string(findData.cFileName));
                 FindClose(hFind);
             }
-            
+
             sprintf_s(searchFile, "%s%s%s", searchPath, exeName, ext);
             if (GetFileAttributesA(searchFile) != INVALID_FILE_ATTRIBUTES) {
                 error(OBF("Disassembly file for this executable detected: ") + std::string(searchFile));
             }
         }
-        
+
         sprintf_s(searchFile, "%s*.id?", searchPath);
         hFind = FindFirstFileA(searchFile, &findData);
         if (hFind != INVALID_HANDLE_VALUE) {
             error(OBF("IDA temporary file detected: ") + std::string(findData.cFileName));
             FindClose(hFind);
         }
-        
+
         CALL_RANDOM_JUNK;
         Sleep(100);
     }
@@ -4189,7 +4103,7 @@ static INLINE void anti_reverse_files() {
 static INLINE void anti_network_analysis() {
     while (true) {
         ULTRA_MEGA_JUNK(0);
-        
+
         static const char* networkAnalysisTools[] = {
             OBF("wireshark.exe"), OBF("fiddler.exe"), OBF("burpsuite.exe"), OBF("burp.exe"), OBF("charles.exe"),
             OBF("intercepter-ng.exe"), OBF("httpdebugger.exe"), OBF("httpanalyzer.exe"), OBF("telerik fiddler"),
@@ -4198,27 +4112,27 @@ static INLINE void anti_network_analysis() {
             OBF("packetmon.exe"),OBF("netwitness.exe"),OBF("capsa.exe"), OBF("omnipeek.exe"),OBF("proxycap.exe")
         };
         static const size_t networkAnalysisToolsCount = sizeof(networkAnalysisTools) / sizeof(networkAnalysisTools[0]);
-        
+
         HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
         if (snapshot != INVALID_HANDLE_VALUE) {
             PROCESSENTRY32W pe32;
             pe32.dwSize = sizeof(PROCESSENTRY32W);
-            
+
             if (Process32FirstW(snapshot, &pe32)) {
                 do {
                     char processName[MAX_PATH];
                     wcstombs_s(nullptr, processName, pe32.szExeFile, MAX_PATH);
                     std::string procNameLower = processName;
                     std::transform(procNameLower.begin(), procNameLower.end(), procNameLower.begin(), ::tolower);
-                    
+
                     for (size_t i = 0; i < networkAnalysisToolsCount; ++i) {
                         const char* tool = networkAnalysisTools[i];
                         std::string toolLower = tool;
                         std::transform(toolLower.begin(), toolLower.end(), toolLower.begin(), ::tolower);
-                        
+
                         if (procNameLower.find(toolLower) != std::string::npos) {
                             error(OBF("Network analysis tool detected: ") + std::string(processName));
-                            
+
                             HANDLE hProcess = OpenProcess(PROCESS_TERMINATE, FALSE, pe32.th32ProcessID);
                             if (hProcess) {
                                 TerminateProcess(hProcess, 0);
@@ -4230,17 +4144,17 @@ static INLINE void anti_network_analysis() {
             }
             CloseHandle(snapshot);
         }
-        
+
         HKEY hKey;
         if (RegOpenKeyExA(HKEY_CURRENT_USER, OBF("Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings"), 0, KEY_READ, &hKey) == ERROR_SUCCESS) {
             DWORD proxyEnabled = 0;
             DWORD dataSize = sizeof(DWORD);
-            
+
             if (RegQueryValueExA(hKey, OBF("ProxyEnable"), NULL, NULL, (LPBYTE)&proxyEnabled, &dataSize) == ERROR_SUCCESS) {
                 if (proxyEnabled) {
-                    char proxyServer[256] = {0};
+                    char proxyServer[256] = { 0 };
                     dataSize = sizeof(proxyServer);
-                    
+
                     if (RegQueryValueExA(hKey, OBF("ProxyServer"), NULL, NULL, (LPBYTE)proxyServer, &dataSize) == ERROR_SUCCESS) {
                         error(OBF("System proxy detected: ") + std::string(proxyServer));
                     }
@@ -4248,27 +4162,27 @@ static INLINE void anti_network_analysis() {
             }
             RegCloseKey(hKey);
         }
-        
+
         HCERTSTORE hStore = CertOpenSystemStoreA(0, OBF("ROOT"));
         if (hStore) {
             PCCERT_CONTEXT pCertContext = NULL;
             while (pCertContext = CertEnumCertificatesInStore(hStore, pCertContext)) {
-                char certName[256] = {0};
+                char certName[256] = { 0 };
                 if (CertGetNameStringA(pCertContext, CERT_NAME_SIMPLE_DISPLAY_TYPE, 0, NULL, certName, sizeof(certName))) {
                     const char* suspiciousCerts[] = {
                         OBF("Fiddler"),OBF("Burp"),OBF("Charles"), OBF("HTTP Toolkit"),OBF("mitmproxy"),
-                       OBF("Telerik"), OBF("Proxy"), OBF("Interception"), OBF("Debug"), OBF("Capture")
+                       OBF("Telerik"), OBF("Proxy"), OBF("Interception"), OBF("Debug"), OBF("Take Two"), OBF("Take2"), OBF("Capture")
                     };
-                    
+
                     std::string certNameLower = certName;
                     std::transform(certNameLower.begin(), certNameLower.end(), certNameLower.begin(), ::tolower);
-                    
+
                     const size_t suspiciousCertsCount = sizeof(suspiciousCerts) / sizeof(suspiciousCerts[0]);
                     for (size_t i = 0; i < suspiciousCertsCount; ++i) {
                         const char* cert = suspiciousCerts[i];
                         std::string certLower = cert;
                         std::transform(certLower.begin(), certLower.end(), certLower.begin(), ::tolower);
-                        
+
                         if (certNameLower.find(certLower) != std::string::npos) {
                             error(OBF("Suspicious SSL certificate detected: ") + std::string(certName));
                         }
@@ -4277,14 +4191,14 @@ static INLINE void anti_network_analysis() {
             }
             CertCloseStore(hStore, 0);
         }
-        
+
         char envVar[1024];
         if (GetEnvironmentVariableA(OBF("HTTP_PROXY"), envVar, sizeof(envVar)) ||
             GetEnvironmentVariableA(OBF("HTTPS_PROXY"), envVar, sizeof(envVar)) ||
             GetEnvironmentVariableA(OBF("ALL_PROXY"), envVar, sizeof(envVar))) {
             error(OBF("Proxy environment variable detected: ") + std::string(envVar));
         }
-        
+
         CALL_RANDOM_JUNK;
         Sleep(1000);
     }
@@ -4311,7 +4225,7 @@ INLINE bool check_vm_registry_keys() {
         OBF("HARDWARE\\DESCRIPTION\\System\\VideoBiosVersion"),
         OBF("HARDWARE\\DESCRIPTION\\System\\BIOS\\SystemManufacturer")
     };
-    
+
     const size_t vmRegistryKeysCount = sizeof(vmRegistryKeys) / sizeof(vmRegistryKeys[0]);
     for (size_t i = 0; i < vmRegistryKeysCount; ++i) {
         const char* key = vmRegistryKeys[i];
@@ -4321,7 +4235,7 @@ INLINE bool check_vm_registry_keys() {
             return true;
         }
     }
-    
+
     return false;
 }
 
@@ -4348,7 +4262,7 @@ INLINE bool check_vm_files() {
         OBF("C:\\windows\\system32\\VMwareUser.exe"),
         OBF("C:\\windows\\system32\\VMwareTray.exe")
     };
-    
+
     const size_t vmFilesCount = sizeof(vmFiles) / sizeof(vmFiles[0]);
     for (size_t i = 0; i < vmFilesCount; ++i) {
         const char* file = vmFiles[i];
@@ -4356,7 +4270,7 @@ INLINE bool check_vm_files() {
             return true;
         }
     }
-    
+
     return false;
 }
 
@@ -4366,28 +4280,28 @@ INLINE bool check_vm_processes() {
         OBF("vboxtray.exe"), OBF("vboxcontrol.exe"),OBF("prl_tools.exe"), OBF("prl_cc.exe"),
         OBF("SharedIntApp.exe"), OBF("VGAuthService.exe"), OBF("vmacthlp.exe"), OBF("hgfs.exe")
     };
-    
+
     HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
     if (snapshot == INVALID_HANDLE_VALUE) {
         return false;
     }
-    
+
     PROCESSENTRY32W pe32;
     pe32.dwSize = sizeof(PROCESSENTRY32W);
-    
+
     if (Process32FirstW(snapshot, &pe32)) {
         do {
             char processName[MAX_PATH];
             wcstombs_s(nullptr, processName, pe32.szExeFile, MAX_PATH);
             std::string procNameLower = processName;
             std::transform(procNameLower.begin(), procNameLower.end(), procNameLower.begin(), ::tolower);
-            
+
             const size_t vmProcessesCount = sizeof(vmProcesses) / sizeof(vmProcesses[0]);
             for (size_t i = 0; i < vmProcessesCount; ++i) {
                 const char* vmProc = vmProcesses[i];
                 std::string vmProcLower = vmProc;
                 std::transform(vmProcLower.begin(), vmProcLower.end(), vmProcLower.begin(), ::tolower);
-                
+
                 if (procNameLower == vmProcLower) {
                     CloseHandle(snapshot);
                     return true;
@@ -4395,7 +4309,7 @@ INLINE bool check_vm_processes() {
             }
         } while (Process32NextW(snapshot, &pe32));
     }
-    
+
     CloseHandle(snapshot);
     return false;
 }
@@ -4403,40 +4317,40 @@ INLINE bool check_vm_processes() {
 static INLINE void anti_vm_advanced() {
     while (true) {
         ULTRA_MEGA_JUNK(0);
-        
+
         if (check_vm_registry_keys()) {
             error(OBF("Virtual machine detected through registry keys!"));
         }
-        
+
         if (check_vm_files()) {
             error(OBF("Virtual machine detected through system files!"));
         }
-        
+
         if (check_vm_processes()) {
             error(OBF("Virtual machine detected through running processes!"));
         }
-        
+
         HANDLE hDevice = CreateFileA(OBF("\\\\.\\VBoxMiniRdrDN"), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
         if (hDevice != INVALID_HANDLE_VALUE) {
             CloseHandle(hDevice);
             error(OBF("VirtualBox device detected!"));
         }
-        
+
         hDevice = CreateFileA("\\\\.\\vmci", GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
         if (hDevice != INVALID_HANDLE_VALUE) {
             CloseHandle(hDevice);
             error(OBF("VMware device detected!"));
         }
-        
+
         HKEY hKey;
         char buffer[256] = { 0 };
         DWORD bufferSize = sizeof(buffer);
-        
+
         if (RegOpenKeyExA(HKEY_LOCAL_MACHINE, OBF("HARDWARE\\DESCRIPTION\\System"), 0, KEY_READ, &hKey) == ERROR_SUCCESS) {
             if (RegQueryValueExA(hKey, OBF("SystemBiosVersion"), NULL, NULL, (LPBYTE)buffer, &bufferSize) == ERROR_SUCCESS) {
                 std::string biosVersion = buffer;
                 std::transform(biosVersion.begin(), biosVersion.end(), biosVersion.begin(), ::tolower);
-                
+
                 if (biosVersion.find(OBF("vmware")) != std::string::npos ||
                     biosVersion.find(OBF("virtualbox")) != std::string::npos ||
                     biosVersion.find(OBF("qemu")) != std::string::npos) {
@@ -4445,7 +4359,7 @@ static INLINE void anti_vm_advanced() {
             }
             RegCloseKey(hKey);
         }
-        
+
         system(OBF("wmic computersystem get manufacturer,model,name,username,domain > %TEMP%\\wmicheck.tmp"));
         FILE* file;
         if (fopen_s(&file, OBF("%TEMP%\\wmicheck.tmp"), "r") == 0 && file) {
@@ -4453,7 +4367,7 @@ static INLINE void anti_vm_advanced() {
             while (fgets(line, sizeof(line), file)) {
                 std::string lineStr = line;
                 std::transform(lineStr.begin(), lineStr.end(), lineStr.begin(), ::tolower);
-                
+
                 if (lineStr.find(OBF("vmware")) != std::string::npos ||
                     lineStr.find(OBF("virtualbox")) != std::string::npos ||
                     lineStr.find(OBF("qemu")) != std::string::npos ||
@@ -4468,7 +4382,7 @@ static INLINE void anti_vm_advanced() {
             fclose(file);
             DeleteFileA(OBF("%TEMP%\\wmicheck.tmp"));
         }
-        
+
         CALL_RANDOM_JUNK;
         Sleep(2000);
     }
@@ -4479,7 +4393,7 @@ static INLINE void anti_vm_advanced() {
 static INLINE void anti_instrumentation() {
     while (true) {
         ULTRA_MEGA_JUNK(0);
-        
+
         const char* instrumentationTools[] = {
             OBF("frida-server.exe"), OBF("frida-helper-32.exe"), OBF("frida-helper-64.exe"),
             OBF("frida-agent.dll"), OBF("frida.dll"), OBF("frida-agent-32.dll"), OBF("frida-agent-64.dll"),
@@ -4493,26 +4407,26 @@ static INLINE void anti_instrumentation() {
             OBF("de4dot.exe"), OBF("de4dot-x64.exe"), OBF("de4dot-x86.exe"),
             OBF("ilspy.exe"), OBF("dnspy.exe"), OBF("reflector.exe")
         };
-        
+
         HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
         if (snapshot != INVALID_HANDLE_VALUE) {
             PROCESSENTRY32W pe32;
             pe32.dwSize = sizeof(PROCESSENTRY32W);
-            
+
             if (Process32FirstW(snapshot, &pe32)) {
                 do {
                     char processName[MAX_PATH];
                     wcstombs_s(nullptr, processName, pe32.szExeFile, MAX_PATH);
                     std::string procNameLower = processName;
                     std::transform(procNameLower.begin(), procNameLower.end(), procNameLower.begin(), ::tolower);
-                    
+
                     for (const auto& tool : instrumentationTools) {
                         std::string toolLower = tool;
                         std::transform(toolLower.begin(), toolLower.end(), toolLower.begin(), ::tolower);
-                        
+
                         if (procNameLower.find(toolLower) != std::string::npos) {
                             error(OBF("Instrumentation tool detected: ") + std::string(processName));
-                            
+
                             HANDLE hProcess = OpenProcess(PROCESS_TERMINATE, FALSE, pe32.th32ProcessID);
                             if (hProcess) {
                                 TerminateProcess(hProcess, 0);
@@ -4524,29 +4438,29 @@ static INLINE void anti_instrumentation() {
             }
             CloseHandle(snapshot);
         }
-        
+
         HANDLE hModuleSnap = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32, GetCurrentProcessId());
         if (hModuleSnap != INVALID_HANDLE_VALUE) {
             MODULEENTRY32W me32;
             me32.dwSize = sizeof(MODULEENTRY32W);
-            
+
             if (Module32FirstW(hModuleSnap, &me32)) {
                 do {
                     char moduleName[MAX_PATH];
                     wcstombs_s(nullptr, moduleName, me32.szModule, MAX_PATH);
                     std::string modNameLower = moduleName;
                     std::transform(modNameLower.begin(), modNameLower.end(), modNameLower.begin(), ::tolower);
-                    
+
                     const char* suspiciousModules[] = {
                         OBF("frida"), OBF("pin"), OBF("dynamorio"), OBF("dr"), OBF("apimon"), OBF("hook"), OBF("inject"),
                         OBF("spy"), OBF("monitor"), OBF("interop"), OBF("intercept"), OBF("detour"), OBF("easyhook"),
                         OBF("minhook"), OBF("capstone"), OBF("deviare"), OBF("winapi"), OBF("dbghelp"), OBF("debug")
                     };
-                    
+
                     for (const auto& module : suspiciousModules) {
                         if (modNameLower.find(module) != std::string::npos) {
                             error(OBF("Suspicious module detected: ") + std::string(moduleName));
-                            
+
                             HMODULE hModule = GetModuleHandleA(moduleName);
                             if (hModule) {
                                 FreeLibrary(hModule);
@@ -4557,13 +4471,13 @@ static INLINE void anti_instrumentation() {
             }
             CloseHandle(hModuleSnap);
         }
-        
+
         const char* fridaPipes[] = {
             OBF("\\\\.\\pipe\\frida-*"),
             OBF("\\\\.\\pipe\\gadget-*"),
             OBF("\\\\.\\pipe\\re.frida.*")
         };
-        
+
         for (const auto& pipe : fridaPipes) {
             WIN32_FIND_DATAA findData;
             HANDLE hFind = FindFirstFileA(pipe, &findData);
@@ -4572,25 +4486,25 @@ static INLINE void anti_instrumentation() {
                 FindClose(hFind);
             }
         }
-        
+
         char envVar[1024];
         if (GetEnvironmentVariableA(OBF("DYNAMORIO_HOME"), envVar, sizeof(envVar)) ||
             GetEnvironmentVariableA(OBF("DYNAMORIO_LOGDIR"), envVar, sizeof(envVar)) ||
             GetEnvironmentVariableA(OBF("DYNAMORIO_OPTIONS"), envVar, sizeof(envVar))) {
             error(OBF("DynamoRIO environment variables detected!"));
         }
-        
+
         if (GetEnvironmentVariableA(OBF("PIN_ROOT"), envVar, sizeof(envVar)) ||
             GetEnvironmentVariableA(OBF("PIN_VM_LD_LIBRARY_PATH"), envVar, sizeof(envVar))) {
             error(OBF("PIN environment variables detected!"));
         }
-        
+
         HKEY hKey;
         if (RegOpenKeyExA(HKEY_LOCAL_MACHINE, OBF("SOFTWARE\\Frida"), 0, KEY_READ, &hKey) == ERROR_SUCCESS) {
             error(OBF("Frida registry key detected!"));
             RegCloseKey(hKey);
         }
-        
+
         auto start = std::chrono::high_resolution_clock::now();
         volatile int counter = 0;
         for (volatile int i = 0; i < 10000; i++) {
@@ -4598,18 +4512,18 @@ static INLINE void anti_instrumentation() {
         }
         auto end = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
-        
+
         if (duration > 10000) {
             error(OBF("Possible code instrumentation detected (timing anomaly)!"));
         }
-        
+
         HMODULE kernel32 = GetModuleHandleA(OBF("kernel32.dll"));
         if (kernel32) {
             FARPROC procAddr = GetProcAddress(kernel32, OBF("LoadLibraryA"));
             if (procAddr) {
                 BYTE firstBytes[5];
                 memcpy(firstBytes, procAddr, 5);
-                
+
                 if (firstBytes[0] == 0xE9 ||
                     (firstBytes[0] == 0xFF && firstBytes[1] == 0x25) ||
                     (firstBytes[0] == 0x68 && firstBytes[5] == 0xC3)) {
@@ -4617,7 +4531,7 @@ static INLINE void anti_instrumentation() {
                 }
             }
         }
-        
+
         CALL_RANDOM_JUNK;
         Sleep(1000);
     }
@@ -4667,7 +4581,7 @@ static auto obfuscate_pe_header() -> void
         {
             // Confuse dumpers that iterate sections
             nt_headers->FileHeader.NumberOfSections = 0;
-            
+
             // Confuse tools relying on image size
             nt_headers->OptionalHeader.SizeOfImage = 0x10000000;
 
@@ -4684,7 +4598,7 @@ static auto obfuscate_pe_header() -> void
             VirtualProtect(nt_headers, sizeof(IMAGE_NT_HEADERS), old_protect, &old_protect);
         }
     }
-    __except(EXCEPTION_EXECUTE_HANDLER) {}
+    __except (EXCEPTION_EXECUTE_HANDLER) {}
 }
 
 static auto destroy_import_names() -> void
@@ -4694,15 +4608,15 @@ static auto destroy_import_names() -> void
         auto base = reinterpret_cast<std::uintptr_t>(GetModuleHandle(nullptr));
         auto dos_header = reinterpret_cast<PIMAGE_DOS_HEADER>(base);
         if (dos_header->e_magic != IMAGE_DOS_SIGNATURE) return;
-        
+
         auto nt_headers = reinterpret_cast<PIMAGE_NT_HEADERS>(base + dos_header->e_lfanew);
         if (nt_headers->Signature != IMAGE_NT_SIGNATURE) return;
-        
+
         auto import_dir = &nt_headers->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_IMPORT];
         if (import_dir->VirtualAddress == 0) return;
-        
+
         auto import_desc = reinterpret_cast<PIMAGE_IMPORT_DESCRIPTOR>(base + import_dir->VirtualAddress);
-        
+
         while (import_desc->Name)
         {
             auto dll_name = reinterpret_cast<char*>(base + import_desc->Name);
@@ -4715,7 +4629,7 @@ static auto destroy_import_names() -> void
             ++import_desc;
         }
     }
-    __except(EXCEPTION_EXECUTE_HANDLER) {}
+    __except (EXCEPTION_EXECUTE_HANDLER) {}
 }
 
 static auto erase_section_names() -> void
@@ -4725,12 +4639,12 @@ static auto erase_section_names() -> void
         auto base = reinterpret_cast<std::uintptr_t>(GetModuleHandle(nullptr));
         auto dos_header = reinterpret_cast<PIMAGE_DOS_HEADER>(base);
         if (dos_header->e_magic != IMAGE_DOS_SIGNATURE) return;
-        
+
         auto nt_headers = reinterpret_cast<PIMAGE_NT_HEADERS>(base + dos_header->e_lfanew);
         if (nt_headers->Signature != IMAGE_NT_SIGNATURE) return;
-        
+
         auto section_header = IMAGE_FIRST_SECTION(nt_headers);
-        
+
         for (int i = 0; i < nt_headers->FileHeader.NumberOfSections; i++)
         {
             DWORD old_protect;
@@ -4741,16 +4655,16 @@ static auto erase_section_names() -> void
             }
         }
     }
-    __except(EXCEPTION_EXECUTE_HANDLER) {}
+    __except (EXCEPTION_EXECUTE_HANDLER) {}
 }
 
 static INLINE void anti_dump_pe() {
-    std::thread([](){
+    std::thread([]() {
         std::this_thread::sleep_for(std::chrono::seconds(2));
         obfuscate_pe_header();
         destroy_import_names();
         erase_section_names();
-    }).detach();
+        }).detach();
 }
 
 #define ANTI_DUMP_PE anti_dump_pe()

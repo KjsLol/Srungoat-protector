@@ -84,10 +84,10 @@
 */
 
 #define JUNK_ON_OBF 1  // 0 - off, 1 - on
-#define JUNK_ON_OBF_LEVEL 1  // 0 - low, 1 - medium, 2 - high    
+#define JUNK_ON_OBF_LEVEL 1  // 0 - off, 1 - low, 2 - medium, 3 - high   
 #define Name_Of_Sections_watermark ".1337" 
 #define FAKE_SIGNATURES 1 // 0 - off, 1 - on
-#define CALL_LEVEL 2 // 0 - low, 1 - medium, 2 - high
+#define CALL_LEVEL 2 // 0 - off, 1 - medium, 2 - high
 
 #ifdef _MSC_VER
 #define SECTION(x) __declspec(allocate(x))
